@@ -1,0 +1,79 @@
+<dialog class="quote-dialog" id="quote-dialog" aria-labelledby="quote-title" aria-describedby="quote-description">
+    <div class="dialog-inner">
+      <button class="dialog-close icon-button" aria-label="Close quote builder"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div class="dialog-brand"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> VBK</div>
+      <div class="enquiry-progress" aria-hidden="true"><span></span></div>
+      <span class="request-type-chip" id="request-type-chip">QUOTE REQUEST</span>
+      <p class="eyebrow" id="quote-progress">YOUR ENQUIRY · STEP 1 OF 2</p>
+      <h2 id="quote-title">Let’s start with<br><em>your space.</em></h2>
+      <p id="quote-description">Tell us a little about your space. We’ll send your enquiry directly to VBK.</p>
+      <form id="quote-form" action="/api/enquiries" method="POST" aria-describedby="enquiry-privacy">
+        <input type="hidden" name="request_type" value="Quote request">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
+        <div id="quote-step-one">
+          <fieldset>
+            <legend>This is for my</legend>
+            <div class="property-options">
+              <label class="property-option"><input type="radio" name="property" value="Home" checked><span><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Home<svg class="selection-check icon" aria-hidden="true"><use href="#i-check"/></svg></span></label>
+              <label class="property-option"><input type="radio" name="property" value="Business"><span><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg>Business<svg class="selection-check icon" aria-hidden="true"><use href="#i-check"/></svg></span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>What are you noticing? <span class="optional">Choose all that apply</span></legend>
+            <div class="pest-options">
+              <label><input type="checkbox" name="pest" value="Cockroaches"><span>Cockroaches</span></label>
+              <label><input type="checkbox" name="pest" value="Bed bugs"><span>Bed bugs</span></label>
+              <label><input type="checkbox" name="pest" value="Rodents"><span>Rodents</span></label>
+              <label><input type="checkbox" name="pest" value="Other / not sure"><span>Other / not sure</span></label>
+            </div>
+          </fieldset>
+          <div class="form-row">
+            <label class="field-label">Your area / city<input type="text" name="area" placeholder="e.g. Thane, Mumbai" maxlength="100" autocomplete="address-level2"></label>
+            <label class="field-label" for="space-size">Approximate space<select id="space-size" name="size" aria-label="Approximate space"><option value="Not specified">Select size (optional)</option><option>1 BHK / small space</option><option>2 BHK</option><option>3 BHK or larger</option><option>Commercial premises</option><option>Not sure yet</option></select></label>
+          </div>
+          <div class="form-row">
+            <label class="field-label">PIN code <span class="optional">Optional</span><input type="text" name="pincode" placeholder="6-digit PIN code" inputmode="numeric" pattern="[0-9]{6}" minlength="6" maxlength="6" autocomplete="postal-code" data-error="pin-error" aria-describedby="pin-error"><span class="field-error" id="pin-error" hidden></span></label>
+            <label class="field-label">Property type<select name="premises_type" id="premises-type" aria-label="Property type"><option value="">Select type (optional)</option><option data-family="Home">Apartment</option><option data-family="Home">Independent home</option><option data-family="Business">Office / retail</option><option data-family="Business">Food / hospitality</option><option data-family="Business">Shared / multiple sites</option><option data-family="Business">Other workplace</option></select></label>
+          </div>
+          <label class="field-label">What would you like to discuss?<select name="care_preference" aria-label="Care preference"><option>Help me decide</option><option>A current pest concern</option><option>Discuss ongoing care</option></select></label>
+          <button class="button button-dark form-next" type="button">Continue <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+        <div id="quote-step-two" hidden>
+          <section class="enquiry-summary" aria-labelledby="space-summary-title"><p id="space-summary-title">YOUR SPACE AT A GLANCE</p><ul id="space-summary"></ul><small>Use Back to change these details.</small></section>
+          <label class="field-label">Your name <span class="required-label">Required</span><input name="customer" id="customer-name" type="text" placeholder="What should we call you?" maxlength="100" autocomplete="name" required disabled data-error="name-error" aria-describedby="name-error"><span class="field-error" id="name-error" hidden></span></label>
+          <div class="form-row">
+            <label class="field-label">Contact number <span class="required-label">Required</span><input name="phone" id="customer-phone" type="tel" placeholder="Your phone number" minlength="7" maxlength="25" autocomplete="tel" required disabled data-error="phone-error" aria-describedby="phone-error"><span class="field-error" id="phone-error" hidden></span></label>
+            <label class="field-label">Email address <span class="optional">Optional</span><input name="email" type="email" placeholder="you@example.com" maxlength="254" autocomplete="email" disabled data-error="email-error" aria-describedby="email-error"><span class="field-error" id="email-error" hidden></span></label>
+          </div>
+          <label class="field-label">Anything we should know? <span class="optional">Optional</span><textarea name="notes" rows="3" placeholder="Affected rooms, signs you’ve noticed, or a question for us…" maxlength="1000" disabled></textarea></label>
+          <div class="visit-preferences"><span class="visit-label"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg> A TIME THAT SUITS YOU <span>Optional</span></span><div class="form-row"><label class="field-label"><span id="preferred-date-label">Preferred visit date</span><input type="date" name="preferred_date" id="preferred-date" disabled data-error="date-error" aria-describedby="date-preference-help date-error"><span class="field-error" id="date-error" hidden></span></label><label class="field-label">Preferred time<select name="preferred_time" aria-label="Preferred time" disabled><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label></div><p class="form-help" id="date-preference-help">Your preferences are requests. The team will confirm availability.</p></div>
+          <p class="privacy-note" id="enquiry-privacy"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>By sending, you agree to be contacted about this enquiry. Read our <a href="/privacy-policy">privacy policy</a>.</span></p>
+          <div class="form-error" id="quote-error" role="alert" tabindex="-1" hidden><p id="quote-error-message"></p><a id="enquiry-email-fallback" href="mailto:abhishek.bhole123@gmail.com">Email this enquiry ↗</a><!--business:enquiry-fallback--></div>
+          <div class="form-actions">
+            <button type="button" class="text-link form-back">← Back</button>
+            <button class="button button-dark" id="submit-enquiry" type="submit"><span id="submit-label">Send enquiry</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+          <p class="form-help enquiry-status" id="quote-delivery-status" role="status" aria-live="polite" data-state="idle">Status: Ready to send.</p>
+        </div>
+      </form>
+      <div class="quote-result" id="quote-result" hidden>
+        <div class="result-check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></div>
+        <p class="result-message" tabindex="-1">Enquiry sent. Thank you for getting in touch.</p>
+        <p class="form-help enquiry-status" id="quote-submission-status" role="status" aria-live="polite" data-state="idle"></p>
+        <p>Thank you for reaching out to VBK. We can contact you using the details you provided. You can keep a copy of your enquiry below. Any requested date or time is subject to confirmation.</p>
+        <pre id="enquiry-preview"></pre>
+        <div class="result-actions"><button class="button button-dark" id="copy-enquiry"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copy enquiry</button><button class="button button-outline" id="download-enquiry">Download <svg class="icon" aria-hidden="true"><use href="#i-down"/></svg></button></div>
+        <button class="text-link new-enquiry">Start a new enquiry ↗</button>
+      </div>
+      <div class="dialog-footer"><span class="status-dot"></span> A LITTLE CARE. A BETTER SPACE.</div>
+    </div>
+  </dialog>
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
+    <div class="search-dialog-inner"><div class="search-heading"><span class="eyebrow">LET’S FIND WHAT YOU NEED</span><button class="icon-button" data-close-search aria-label="Close search"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div><h2 id="search-title">A little <em>direction.</em></h2><label class="site-search-label" for="site-search"><svg class="icon" aria-hidden="true"><use href="#i-magnifier"/></svg><input type="search" id="site-search" placeholder="Try “rodents”, “business” or “callback”…" autocomplete="off" aria-label="Search services, plans and guides" aria-controls="search-results"></label><p id="search-status" class="search-status" role="status"></p><div id="search-results" class="search-results"></div><div class="search-footer"><span>Services, plans & useful guides.</span><span>ESC to close</span></div></div>
+  </dialog>
+  <dialog class="detail-dialog" id="detail-dialog" data-drawer aria-labelledby="detail-title">
+    <div class="detail-inner"><button class="icon-button detail-close" data-close-detail aria-label="Close guide"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button><div class="detail-symbol"><svg id="detail-icon" aria-hidden="true"><use href="#i-shield"/></svg><span class="detail-orbit" aria-hidden="true"></span></div><p class="eyebrow" id="detail-category"></p><h2 id="detail-title"></h2><p class="detail-description" id="detail-description"></p><p id="detail-introduction"></p><h3>Useful details for your enquiry</h3><ul class="detail-list" id="detail-list"></ul><div class="detail-next"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><p id="detail-next"></p></div><button class="button button-dark" id="detail-enquiry">Start an enquiry <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button><p class="detail-footnote">Scope, pricing, and availability are confirmed with your quotation.</p></div>
+  </dialog>
+  <aside class="contact-widget" aria-label="Quick contact"><div class="contact-popover" id="contact-popover" hidden><span class="eyebrow">A LITTLE HELP?</span><h3>Let’s talk about<br><em>your space.</em></h3><a href="/quote?request=callback" data-callback><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span>Request a callback<small>Leave a number. Start a conversation.</small></span><span aria-hidden="true">↗</span></a><a href="mailto:abhishek.bhole123@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>Email us<small>Write to VBK.</small></span><span aria-hidden="true">↗</span></a><a href="/quote" data-coverage><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span>Ask about your area<small>Share your location with your enquiry.</small></span><span aria-hidden="true">↗</span></a></div><button class="contact-launcher" id="contact-launcher" aria-expanded="false" aria-controls="contact-popover"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>Need a hand?</span><svg class="icon contact-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button></aside>
+  <!--business:mobile-->
+  <div class="toast" role="status" aria-live="polite"></div>

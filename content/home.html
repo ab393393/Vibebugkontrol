@@ -1,0 +1,66 @@
+<main id="main" class="home-page" data-vbk-motion>
+
+<section class="hero container" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="eyebrow" data-vbk-hero-reveal><span class="status-dot"></span> HOME &amp; BUSINESS PEST CONTROL</p>
+        <h1 id="hero-heading"><span class="hero-line"><span>Mumbai,</span></span> <span class="hero-line"><span>good vibes in.</span></span> <span class="hero-line"><em>Pests out.</em></span></h1>
+        <p class="hero-description">Pest control in Mumbai for homes, restaurants and offices. From cockroaches and bed bugs to rodents, VBK — Vibe Bug Kontrol helps you find the next step.</p>
+        <div class="hero-actions" data-vbk-hero-reveal><a href="/quote" class="button button-dark button-large" data-quote>Get a quote <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="text-link" href="#plan-finder">Help me choose <svg class="icon" aria-hidden="true"><use href="#i-down"/></svg></a></div>
+        <!--contact:hero-->
+        <div class="hero-note"><span class="mini-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span>Thoughtful pest care.<br><strong>For the places that matter.</strong></span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image-wrap"><img class="hero-image" src="/assets/home.webp" srcset="/assets/home-480.webp 480w, /assets/home-800.webp 800w, /assets/home.webp 1536w" sizes="(max-width:760px) 90vw, 45vw" alt="Illustrative sunlit living room with natural wood, soft furnishings and greenery" width="1536" height="1024" fetchpriority="high"><span class="image-label"><span class="status-dot"></span> FEEL AT HOME. AGAIN.</span><div class="image-bottom-shade"></div></div>
+        <div class="care-badge"><svg class="badge-orbit" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="badge-circle" d="M60,60m-44,0a44,44 0 1,1 88,0a44,44 0 1,1 -88,0"/></defs><text><textPath href="#badge-circle">PROTECT WHAT MATTERS · VBK · </textPath></text></svg><svg class="badge-center" aria-hidden="true"><use href="#i-spark"/></svg></div>
+        <div class="photo-caption"><span>Room for the good things.</span><span>01 — AT HOME</span></div>
+      </div>
+    </section>
+
+<section class="services-section section" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-heading" data-vbk-reveal><div><p class="eyebrow">LET’S GET TO THE ROOT OF IT</p><h2 id="services-heading">Know the pest.<br>Find your <em>next step.</em></h2></div><p class="section-intro">Pest control for your home or business.<br class="desktop-break"> Choose your concern for signs, preparation<br class="desktop-break"> and the next steps in Mumbai.</p></div>
+        <div class="pest-grid" data-vbk-stagger>
+          <a class="pest-card" href="/services/cockroach-control"><span class="card-number">01</span><svg class="pest-icon" aria-hidden="true"><use href="#i-roach"/></svg><h3>Cockroach control in Mumbai</h3><p>Activity around cupboards, sinks or kitchen appliances? Explore assessment and preparation.</p><span class="card-action">View service <span class="round-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></span></a>
+          <a class="pest-card" href="/services/bed-bug-control"><span class="card-number">02</span><svg class="pest-icon" aria-hidden="true"><use href="#i-bedbug"/></svg><h3>Bed bug treatment in Mumbai</h3><p>Signs around beds, mattresses or furniture? Start with identification and the affected rooms.</p><span class="card-action">View service <span class="round-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></span></a>
+          <a class="pest-card" href="/services/rodent-control"><span class="card-number">03</span><svg class="pest-icon" aria-hidden="true"><use href="#i-rodent"/></svg><h3>Rodent control in Mumbai</h3><p>Rat sightings or damaged food packets? Read about access points, monitoring and follow-up.</p><span class="card-action">View service <span class="round-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></span></a>
+          <a class="pest-card pest-card-alt" href="/services/pest-identification"><span class="card-number">04</span><svg class="pest-icon" aria-hidden="true"><use href="#i-search"/></svg><h3>Not sure yet?</h3><p>Tell us about the signs.<br>Let’s start from there.</p><span class="card-action">Find your next step <span class="round-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></span></a>
+        </div>
+      <details class="business-help home-plan-finder" id="plan-finder"><summary>Not sure where to start? Find a plan for your space<span class="detail-toggle" aria-hidden="true"></span></summary><div class="finder-shell">
+        <div class="finder-heading"><div><p class="eyebrow">A PLAN STARTS WITH YOUR SPACE</p><h3 id="finder-heading">Let’s find your <em>starting point.</em></h3></div><p>Choose your property, pest concern<br>and the help you’re looking for.</p></div>
+        <form id="finder-form" class="finder-form" action="/quote" method="get">
+          <label class="field-label">This is for my<select name="finder-property" aria-label="Choose your space"><option value="home">Home</option><option value="business">Business</option></select></label>
+          <label class="field-label">What needs attention?<select name="finder-pest" aria-label="Choose your pest concern"><option>Not sure yet</option><option>Cockroaches</option><option>Bed bugs</option><option>Rodents</option></select></label>
+          <label class="field-label">What are you looking for?<select name="finder-care" aria-label="Choose your care preference"><option>Help me decide</option><option>A current pest concern</option><option>Discuss ongoing care</option></select></label>
+          <button type="submit" class="button button-dark">Find my plan <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </form>
+        <div class="finder-result" id="finder-result" hidden>
+          <div class="finder-result-icon"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
+          <div class="finder-result-copy"><span class="eyebrow" id="finder-label"></span><h3 id="finder-title"></h3><p id="finder-description"></p><div class="preference-chips" id="finder-chips"></div></div>
+          <button class="button button-lime" id="continue-finder">Continue with this plan <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+        <p class="sr-only" id="finder-announcement" role="status"></p>
+      </div></details>
+</div>
+    </section>
+
+<section class="business-section section container business-visual-section" id="business-care" aria-labelledby="business-heading">
+  <div class="business-intro" data-vbk-reveal><p class="eyebrow">FOR THE WAY YOU WORK</p><h2 id="business-heading">Your workplace.<br><em>Your requirements.</em></h2><p>Care for restaurants, offices and industrial spaces in Mumbai and Thane. Choose your premises, or discuss an AMC for ongoing pest control.</p><a class="text-link" href="/commercial/amc">Explore business AMC plans <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+<!--visual:diagonal-->
+</section>
+
+<section class="approach-section section" id="how-it-works" aria-labelledby="approach-heading"><div class="container"><div class="section-heading" data-vbk-reveal><div><p class="eyebrow">A CLEAR PATH TO A BETTER SPACE</p><h2 id="approach-heading">Good care.<br><em>Made simple.</em></h2></div><p class="section-intro">From your first enquiry<br>to an agreed service plan.</p></div><div class="process-grid" data-vbk-stagger><span class="process-flow-line" data-vbk-process-line aria-hidden="true"></span><article class="process-step"><div class="process-top"><span>01</span><svg class="process-icon" aria-hidden="true"><use href="#i-search"/></svg></div><h3>Describe the problem.</h3><p>Tell us your Mumbai area, property type, affected rooms and what you’ve noticed. Not sure which pest? Describe the signs.</p></article><article class="process-step"><div class="process-top"><span>02</span><svg class="process-icon" aria-hidden="true"><use href="#i-home"/></svg></div><h3>Discuss the service.</h3><p>Ask about assessment, the proposed method, preparation, children or pets, and what follow-up is included.</p></article><article class="process-step"><div class="process-top"><span>03</span><svg class="process-icon" aria-hidden="true"><use href="#i-shield"/></svg></div><h3>Agree the quote and visit.</h3><p>Confirm the covered areas, price, preparation and availability before booking. A preferred date in the form is a request.</p></article></div></div></section>
+
+<!--business:areas-compact-->
+<!--business:trust-->
+
+<section class="faq-section section container" id="questions" aria-labelledby="faq-heading">
+  <div class="faq-intro" data-vbk-reveal><p class="eyebrow">BEFORE YOU BOOK</p><h2 id="faq-heading">Good questions.<br><em>Clear answers.</em></h2><p>Cost, safety, follow-up and business plans.</p><nav class="home-faq-links" aria-label="More help"><a class="text-link" href="/faq">View all questions <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="text-link" href="/guides">Practical pest control guides <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></nav></div>
+  <div class="faq-content"><div class="faq-list" id="faq-items"><details><summary>How much does pest control in Mumbai cost?<span class="faq-toggle" aria-hidden="true"></span></summary><div><p>Pricing depends on the premises, pest concern, affected areas and agreed method. Ask for a quotation that identifies scope, visit frequency, follow-up and any exclusions. Confirm assessment charges and taxes before agreeing a service.</p></div></details>
+<details><summary>Is pest control safe for children and pets?<span class="faq-toggle" aria-hidden="true"></span></summary><div><p>Precautions depend on the specific method and product. Tell the team about children, pets and sensitivities, and ask for preparation, ventilation, access and re-entry instructions. Do not assume every service has the same restrictions or waiting time.</p></div></details>
+<details><summary>How long does pest control treatment last?<span class="faq-toggle" aria-hidden="true"></span></summary><div><p>There is no universal duration. The pest, starting conditions, method, preparation and continuing exposure matter. Ask what to monitor afterwards, what follow-up is included and how new activity will be assessed.</p></div></details>
+<details><summary>What is included in a restaurant or business AMC?<span class="faq-toggle" aria-hidden="true"></span></summary><div><p>The quotation should state covered premises and pests, scheduled service frequency, preparation, records, exclusions and pricing. Emergency visits and add-ons need explicit terms; they are not automatically included in every annual maintenance contract.</p></div></details></div></div>
+</section>
+
+<section class="closing-section container" aria-labelledby="closing-heading"><div class="closing-content" data-vbk-reveal><p class="eyebrow"><span class="status-dot"></span> LESS WORRY. MORE LIVING.</p><h2 id="closing-heading">Let’s make your space<br>feel like <em>yours again.</em></h2><a href="/quote" class="button button-lime button-large" data-quote>Get a pest control quote <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div><div class="closing-art" data-vbk-shield aria-hidden="true"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="vbk-shield-fallback"><svg class="vbk-shield-static" viewBox="0 0 240 280" aria-hidden="true"><defs><linearGradient id="vbk-edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2f6d8"/><stop offset=".38" stop-color="#b7d685"/><stop offset=".7" stop-color="#6a8950"/><stop offset="1" stop-color="#d5e8a5"/></linearGradient><linearGradient id="vbk-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4b8861"/><stop offset=".42" stop-color="#235c46"/><stop offset="1" stop-color="#12392d"/></linearGradient><linearGradient id="vbk-sheen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2efbd" stop-opacity=".32"/><stop offset=".58" stop-color="#e2efbd" stop-opacity="0"/></linearGradient></defs><ellipse cx="124" cy="256" rx="66" ry="10" fill="#09271f" opacity=".6"/><path d="M124 19 212 55 204 143Q199 205 124 248 49 205 44 143L36 55Z" fill="#729154"/><path d="M117 15 205 51 197 139Q192 201 117 244 42 201 37 139L29 51Z" fill="url(#vbk-edge)"/><path d="M117 28 192 59 185 137Q181 191 117 229 53 191 49 137L42 59Z" fill="url(#vbk-face)"/><path d="M117 33 188 62 181 136Q178 186 117 223 56 186 53 136L46 62Z" fill="url(#vbk-sheen)"/><path d="m81 127 25 25 48-58" fill="none" stroke="#fbfaf6" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div><svg class="art-spark"><use href="#i-spark"/></svg></div></section>
+
+</main>

@@ -1,0 +1,28 @@
+[
+  {
+    "published": true,
+    "slug": "thane",
+    "name": "Thane",
+    "description": "Pest control in Thane for homes, restaurants, offices and industrial premises. Discuss cockroaches, bed bugs, rodents, AMC options and a quote from VBK.",
+    "intro": "VBK provides pest control in Thane for homes, restaurants, cafés, offices and industrial premises. Enquire about cockroach control, bed bug treatment, rodent control or an annual maintenance contract. Start with the signs you have seen, the affected areas and your premises type so the next step can be discussed clearly.",
+    "localContext": "For a Thane enquiry, share the exact location or PIN code and who can arrange access. A home inside a society, a restaurant kitchen and an industrial unit can have different permissions and operating hours. Include building entry arrangements, the areas involved and any previous service history when requesting a quotation. VBK also serves Mumbai; the scope and timing are agreed for the named property.",
+    "planningNotes": [
+      "Give the Thane premises location, approximate size and contact responsible for access.",
+      "Describe the physical signs, affected rooms or zones and when activity was noticed.",
+      "For a restaurant, include kitchen, storage, waste and food-service hours.",
+      "For an office or industrial unit, include restricted areas, shifts and visitor-entry requirements."
+    ],
+    "sections": [
+      {"id":"restaurants","heading":"Restaurant pest control in Thane","paragraphs":["For a restaurant, café, bakery or cloud kitchen, describe the kitchen, ingredient stores, packing areas and waste arrangements. Include your opening hours and the times when affected spaces can be accessed. A request for restaurant pest control near your outlet should identify the actual premises so assessment and attendance can be planned.","Ask which pests and areas are included, what preparation is needed around food or equipment and what follow-up records can be provided. Compare a current-problem quotation with an annual maintenance contract if scheduled services would help you coordinate ongoing site care."]},
+      {"id":"homes-offices","heading":"Homes, societies and office bed bug concerns","paragraphs":["For a flat or independent home, identify affected rooms and any preparation questions involving children or pets. A society enquiry should distinguish common spaces from individual homes and name the person authorised to approve each part of the work.","For a corporate office or coworking bed bug concern, record physical signs and the affected furnishings or rooms. Describe shared spaces, access permissions and requested timing. Ask what identification or inspection is needed, how preparation will work and which follow-up visits are included."]},
+      {"id":"industrial","heading":"Factory, warehouse and MIDC enquiries in Thane","paragraphs":["Include the industrial estate or unit address, affected storage or production zones and site-entry requirements. For a warehouse or godown rodent enquiry, describe sightings or damage by location and date. Mention food or pharma operating procedures and any records your site needs before accepting a service.","Ask whether proofing assessment, sealing or repairs are included or separately scoped. If several buildings or units are involved, list them so the covered premises, monitoring arrangements and maintenance responsibilities are clear in the quotation."]},
+      {"id":"quote","heading":"Request a Thane pest control quotation","paragraphs":["Send the property details and observations through the quote form, or use Call or WhatsApp to contact VBK. Include your preferred time to be contacted and any practical access limits. A requested visit date remains subject to confirmation.","Before booking, agree the covered areas, proposed method, preparation, price and follow-up. For an AMC, confirm the contract period, planned visit frequency, additional call-out terms and exclusions. Monthly or quarterly attendance is agreed against your site’s needs rather than assumed from the annual contract name."]}
+    ],
+    "links": [
+      {"href":"/commercial/restaurant-pest-control","label":"Restaurant and commercial kitchen service details"},
+      {"href":"/commercial/office-bed-bug-control","label":"Office and commercial bed bug treatment"},
+      {"href":"/commercial/industrial-rodent-control","label":"Rodent control for factories and warehouses"},
+      {"href":"/commercial/amc","label":"Annual maintenance contracts and visit schedules"}
+    ]
+  }
+]

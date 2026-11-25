@@ -1,0 +1,28 @@
+{
+  "name": "VBK",
+  "fullName": "Vibe Bug Kontrol",
+  "domain": "[YOUR DOMAIN]",
+  "email": "kardaksamiksha4@gmail.com",
+  "phone": "+91 82916 89183",
+  "whatsappNumber": "918291689183",
+  "address": {
+    "streetAddress": "[BUSINESS ADDRESS]",
+    "addressLocality": "Mumbai",
+    "addressRegion": "Maharashtra",
+    "postalCode": "[PIN CODE]",
+    "addressCountry": "IN"
+  },
+  "areaServed": [
+    "Thane"
+  ],
+  "openingHours": [],
+  "mapEmbedUrl": "[GOOGLE MAPS EMBED URL]",
+  "priceRange": "[PRICE RANGE]",
+  "startingPrices": {},
+  "sameAs": [],
+  "licenseNumber": "[LICENSE NUMBER]",
+  "certifications": [],
+  "yearsExperience": null,
+  "reviews": [],
+  "clients": []
+}
