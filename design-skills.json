@@ -1,0 +1,106 @@
+{
+  "installedFor": "Codex",
+  "skills": [
+    {
+      "name": "animate",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "animate-expo",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "animation-performance",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "animation-vocabulary",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "apple-design",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "ask-sonner",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "break-ui",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "emil-design-eng",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "find-animation-opportunities",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "hallmark",
+      "repository": "https://github.com/Nutlope/hallmark",
+      "commit": "7ec868225c6caa040558c321ee0fefa0e73f83a8"
+    },
+    {
+      "name": "improve-animations",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "migrate-radix-to-base",
+      "repository": "https://github.com/shadcn-ui/ui",
+      "commit": "3d98900e9b73c45f035f8109e9d41ba6a51685e7"
+    },
+    {
+      "name": "mobile-native",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "pick-ui-library",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "prototype",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "review-animations",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    },
+    {
+      "name": "shadcn",
+      "repository": "https://github.com/shadcn-ui/ui",
+      "commit": "3d98900e9b73c45f035f8109e9d41ba6a51685e7"
+    },
+    {
+      "name": "web-design-guidelines",
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "commit": "063bee94c3f4df8453406c830b0a7df0f2860278"
+    },
+    {
+      "name": "write-swift",
+      "repository": "https://github.com/emilkowalski/skills",
+      "commit": "2d228630ba1446365f614a108cb8252f1feda202"
+    }
+  ],
+  "existingSkill": "ui-ux-pro-max",
+  "designReferences": [
+    "https://21st.dev/@ruixen.ui/components/feature-accordion-section",
+    "https://21st.dev/@originui/components/accordion"
+  ],
+  "notes": "Coding skills are installed separately from the website runtime. 21st references inform custom implementations; no paid registry source or MCP connection is configured."
+}
