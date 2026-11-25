@@ -1,0 +1,8 @@
+{
+  "published": false,
+  "slug": "replace-with-area-slug",
+  "name": "[CONFIRMED AREA NAME]",
+  "intro": "[Write a unique introduction of at least 150 characters about the confirmed service scope here.]",
+  "localContext": "[Write original local context of at least 200 characters. Describe actual access, premises or planning considerations without inventing landmarks, demand statistics, completed jobs or offices.]",
+  "planningNotes": ["[First useful local detail]", "[Second useful local detail]", "[Third useful local detail]"]
+}

@@ -1,0 +1,276 @@
+{
+  "reviewedOn": "2026-11-23",
+  "scopeConfirmedByOwner": true,
+  "locations": [
+    "Mumbai",
+    "Thane"
+  ],
+  "purpose": "Editorial keyword targets, not verified ranking or demand estimates.",
+  "demandStatus": "Unknown. News coverage does not prove a search-demand increase; the Semrush phrase_related query failed with QUERY_ERROR.",
+  "targets": [
+    {
+      "id": 1,
+      "keyword": "restaurant pest control services mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control"
+    },
+    {
+      "id": 2,
+      "keyword": "restaurant pest control near me",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control"
+    },
+    {
+      "id": 3,
+      "keyword": "restaurant pest control thane",
+      "cluster": "Restaurant pest control",
+      "destination": "/areas/thane#restaurants"
+    },
+    {
+      "id": 4,
+      "keyword": "cafe pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#food-businesses"
+    },
+    {
+      "id": 5,
+      "keyword": "bakery pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#food-businesses"
+    },
+    {
+      "id": 6,
+      "keyword": "cloud kitchen pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#food-businesses"
+    },
+    {
+      "id": 7,
+      "keyword": "food outlet pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#food-businesses"
+    },
+    {
+      "id": 8,
+      "keyword": "commercial kitchen pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#food-businesses"
+    },
+    {
+      "id": 9,
+      "keyword": "kitchen cockroach control for restaurants mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#cockroaches"
+    },
+    {
+      "id": 10,
+      "keyword": "restaurant rodent control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#rodents"
+    },
+    {
+      "id": 11,
+      "keyword": "FSSAI compliant pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#fssai"
+    },
+    {
+      "id": 12,
+      "keyword": "restaurant pest control AMC mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/amc"
+    },
+    {
+      "id": 13,
+      "keyword": "restaurant pest control price mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#price-amc"
+    },
+    {
+      "id": 14,
+      "keyword": "hotel and restaurant pest control mumbai",
+      "cluster": "Restaurant pest control",
+      "destination": "/commercial/restaurant-pest-control#food-businesses"
+    },
+    {
+      "id": 15,
+      "keyword": "annual pest control contract mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#visit-frequency"
+    },
+    {
+      "id": 16,
+      "keyword": "pest control AMC for offices mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#covered-premises"
+    },
+    {
+      "id": 17,
+      "keyword": "pest control AMC for societies mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#covered-premises"
+    },
+    {
+      "id": 18,
+      "keyword": "pest control AMC for restaurants mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc"
+    },
+    {
+      "id": 19,
+      "keyword": "pest control AMC for factories mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#covered-premises"
+    },
+    {
+      "id": 20,
+      "keyword": "yearly pest control plan mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#visit-frequency"
+    },
+    {
+      "id": 21,
+      "keyword": "quarterly pest control mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#visit-frequency"
+    },
+    {
+      "id": 22,
+      "keyword": "monthly pest control contract mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc#visit-frequency"
+    },
+    {
+      "id": 23,
+      "keyword": "pest control contract for businesses mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc"
+    },
+    {
+      "id": 24,
+      "keyword": "AMC pest control company mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc"
+    },
+    {
+      "id": 25,
+      "keyword": "pest control maintenance contract mumbai",
+      "cluster": "AMC and annual contracts",
+      "destination": "/commercial/amc"
+    },
+    {
+      "id": 26,
+      "keyword": "bed bug treatment for office mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control"
+    },
+    {
+      "id": 27,
+      "keyword": "office bed bug control mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#corporate-coworking"
+    },
+    {
+      "id": 28,
+      "keyword": "bed bug control for corporate offices mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#corporate-coworking"
+    },
+    {
+      "id": 29,
+      "keyword": "bed bug treatment for hotels mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#accommodation"
+    },
+    {
+      "id": 30,
+      "keyword": "bed bug treatment for hostels mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#accommodation"
+    },
+    {
+      "id": 31,
+      "keyword": "bed bug treatment for PG mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#accommodation"
+    },
+    {
+      "id": 32,
+      "keyword": "commercial bed bug treatment mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control"
+    },
+    {
+      "id": 33,
+      "keyword": "bed bug inspection for offices mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#office-signs"
+    },
+    {
+      "id": 34,
+      "keyword": "bed bug treatment for coworking space mumbai",
+      "cluster": "Office and commercial bed bug treatment",
+      "destination": "/commercial/office-bed-bug-control#corporate-coworking"
+    },
+    {
+      "id": 35,
+      "keyword": "rodent control for factories mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#factory-warehouse"
+    },
+    {
+      "id": 36,
+      "keyword": "rodent control for warehouses mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#factory-warehouse"
+    },
+    {
+      "id": 37,
+      "keyword": "rodent control for industrial units mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#factory-warehouse"
+    },
+    {
+      "id": 38,
+      "keyword": "rat control for godowns mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#factory-warehouse"
+    },
+    {
+      "id": 39,
+      "keyword": "rodent control for food factories mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#food-pharma"
+    },
+    {
+      "id": 40,
+      "keyword": "industrial pest control mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control"
+    },
+    {
+      "id": 41,
+      "keyword": "factory pest control contract mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#industrial-contract"
+    },
+    {
+      "id": 42,
+      "keyword": "rodent proofing for factories mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#proofing"
+    },
+    {
+      "id": 43,
+      "keyword": "rat control for pharma companies mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#food-pharma"
+    },
+    {
+      "id": 44,
+      "keyword": "rodent control MIDC mumbai",
+      "cluster": "Industrial rodent control",
+      "destination": "/commercial/industrial-rodent-control#midc"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/* The uploaded kit, scoped to the existing VBK composition. */
+[data-vbk-motion] .process-grid{position:relative}
+.process-flow-line{position:absolute;inset:0 0 auto;height:1px;pointer-events:none;background:var(--ink);transform-origin:left}
+[data-spring-indicator] .dg-selection-pill{transition:none!important}
+.vbk-shield-canvas{position:absolute;inset:-25px;opacity:0;transition:opacity 240ms var(--ease-out);pointer-events:none}
+.vbk-shield-canvas>div{width:100%;height:100%}
+[data-vbk-shield-ready] .vbk-shield-canvas{opacity:1}
+.vbk-shield-fallback{position:absolute;inset:0;opacity:1;transition:opacity 240ms var(--ease-out)}
+.vbk-shield-static{display:block;width:100%;height:100%;stroke:none}
+[data-vbk-shield-ready] .vbk-shield-fallback{opacity:0}
+[data-vbk-shield] .art-orbit{border-color:#779c5b66}
+@media(max-width:760px){.process-flow-line{display:none}}
+@media(prefers-reduced-motion:reduce){.vbk-shield-canvas{display:none}[data-vbk-shield-ready] .vbk-shield-fallback{opacity:1}.process-flow-line{transform:none!important}}

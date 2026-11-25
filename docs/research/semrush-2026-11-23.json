@@ -1,0 +1,165 @@
+{
+  "researchedOn": "2026-11-23",
+  "provider": "Semrush Analytics via Supermetrics Marketing Agent",
+  "database": "in",
+  "geography": "India national keyword database; keywords may contain Mumbai but volumes are not city-only measurements",
+  "sourceFreshness": "Connector results returned cache_used=false; underlying Semrush snapshot date was not supplied. Not a real-time Google SERP check.",
+  "reportScope": "The non-empty reports returned 10 rows despite larger requested limits; treat as samples, not complete keyword inventories.",
+  "reports": [
+    {
+      "target": "pestcontrol99.com",
+      "reportType": "domain_organic",
+      "result": {
+        "success": true,
+        "data": {
+          "schedule_id": "3dac45a91bd709d83e804670765bdecf48671aa9e749803bc355ab21f5c8fa51",
+          "status": "completed",
+          "data": "[10]{Dn,Ph,Po,Ur,Nq,Tr}:\n  pestcontrol99.com,press control,\"47\",\"https://www.pestcontrol99.com/contact/\",5400,0\n  pestcontrol99.com,pest control pune,\"31\",\"https://www.pestcontrol99.com/pest-control-pune/\",4400,50\n  pestcontrol99.com,termite treatment cost,\"26\",\"https://www.pestcontrol99.com/services/termite-pest-control/\",720,16.66\n  pestcontrol99.com,pest control andheri west,\"11\",\"https://www.pestcontrol99.com/pest-control-andheri/\",390,33.33\n  pestcontrol99.com,pest control andheri east,\"19\",\"https://www.pestcontrol99.com/pest-control-andheri/\",260,0\n  pestcontrol99.com,pest control website,\"79\",\"https://www.pestcontrol99.com/services/\",170,0\n  pestcontrol99.com,termite near me,\"56\",\"https://www.pestcontrol99.com/services/\",170,0\n  pestcontrol99.com,past control,\"60\",\"https://www.pestcontrol99.com/services/\",140,0\n  pestcontrol99.com,bee removal,\"45\",\"https://www.pestcontrol99.com/services/honey-bee-pest-control/\",110,0\n  pestcontrol99.com,termite pest control mumbai,\"41\",\"https://www.pestcontrol99.com/services/termite-pest-control/\",110,0",
+          "requested_field_ids": [
+            "Dn",
+            "Ph",
+            "Po",
+            "Ur",
+            "Nq",
+            "Tr"
+          ],
+          "canonical_field_ids": null,
+          "cache_used": false,
+          "cache_time": null,
+          "success": true
+        },
+        "error": null,
+        "notes": null,
+        "business_context": null,
+        "metadata": {
+          "tool_version": "1.27.89",
+          "span_id": "71e50fe9ede6c73d"
+        }
+      }
+    },
+    {
+      "target": "rentokil-pestcontrolindia.com",
+      "reportType": "domain_organic",
+      "result": {
+        "success": true,
+        "data": {
+          "schedule_id": "7fcfc589ddf0548f601291523a38c2b1bd9773bd44f7f6abee22df9cc7f949f5",
+          "status": "completed",
+          "data": "[10]{Dn,Ph,Po,Ur,Nq,Tr}:\n  rentokil-pestcontrolindia.com,pest control,\"4\",\"https://www.rentokil-pestcontrolindia.com/\",60500,3.39\n  rentokil-pestcontrolindia.com,pest control near me,\"7\",\"https://www.rentokil-pestcontrolindia.com/about-rentokil/local-branches/kolkata\",33100,0.8\n  rentokil-pestcontrolindia.com,mosquito tornado pune,\"3\",\"https://www.rentokil-pestcontrolindia.com/blog/mosquitoes/decoding-mosquito-tornadoes\",27100,1.51\n  rentokil-pestcontrolindia.com,most poisonous snake in india,\"1\",\"https://www.rentokil-pestcontrolindia.com/blog/snakes/top-10-most-deadliest-snakes-in-india\",12100,2.03\n  rentokil-pestcontrolindia.com,bed bug exterminator,\"2\",\"https://www.rentokil-pestcontrolindia.com/services/pest-control/bed-bugs\",9900,0.92\n  rentokil-pestcontrolindia.com,big four indian snakes,\"1\",\"https://www.rentokil-pestcontrolindia.com/blog/pest-solutions/most-venomous-snakes-in-india\",5400,0.9\n  rentokil-pestcontrolindia.com,cockroach bite,\"1\",\"https://www.rentokil-pestcontrolindia.com/blog/cockroaches/do-cockroaches-bite-\",4400,0.73\n  rentokil-pestcontrolindia.com,cockroach control,\"1\",\"https://www.rentokil-pestcontrolindia.com/services/pest-control/cockroaches\",4400,0.73\n  rentokil-pestcontrolindia.com,how to remove mosquito from home,\"1\",\"https://www.rentokil-pestcontrolindia.com/blog/mosquitoes/natural-ways-to-remove-mosquitoes-from-home\",2900,0.7\n  rentokil-pestcontrolindia.com,rentokil pest control,\"1\",\"https://www.rentokil-pestcontrolindia.com/\",1300,1.94",
+          "requested_field_ids": [
+            "Dn",
+            "Ph",
+            "Po",
+            "Ur",
+            "Nq",
+            "Tr"
+          ],
+          "canonical_field_ids": null,
+          "cache_used": false,
+          "cache_time": null,
+          "success": true
+        },
+        "error": null,
+        "notes": null,
+        "business_context": null,
+        "metadata": {
+          "tool_version": "1.27.89",
+          "span_id": "8e9d6c89def47661"
+        }
+      }
+    },
+    {
+      "target": "infinitepestcontrol.in",
+      "reportType": "domain_organic",
+      "result": {
+        "success": true,
+        "data": {
+          "schedule_id": "c3d249e190ebad01a3c636fc31732fc1992e56ae9a3a2b21c2db4d14c45a3ae9",
+          "status": "completed",
+          "data": "[]",
+          "requested_field_ids": [
+            "Dn",
+            "Ph",
+            "Po",
+            "Ur",
+            "Nq",
+            "Tr"
+          ],
+          "canonical_field_ids": null,
+          "cache_used": false,
+          "cache_time": null,
+          "success": true
+        },
+        "error": null,
+        "notes": null,
+        "business_context": null,
+        "metadata": {
+          "tool_version": "1.27.89",
+          "span_id": "b032468defccc4eb"
+        }
+      }
+    },
+    {
+      "target": "https://www.rentokil-pestcontrolindia.com/about-rentokil/local-branches/mumbai",
+      "reportType": "url_organic",
+      "result": {
+        "success": true,
+        "data": {
+          "schedule_id": "f3c42c2e24ef28228ee83a59072bbaf61c1408546e5e22196178586e25ec9a9b",
+          "status": "completed",
+          "data": "[10]{Ph,Po,Nq,Tr}:\n  pest control mumbai,\"1\",4400,53.65\n  best pest control in mumbai,\"1\",390,6.58\n  pci mumbai,\"3\",390,4.63\n  pci pest control contact number,\"1\",210,3.41\n  pci pest control near me,\"2\",210,1.95\n  pest control services in mumbai,\"1\",210,2.43\n  best pest control services in mumbai,\"1\",170,1.95\n  top 10 pest control companies in mumbai,\"2\",170,1.95\n  pci thane,\"1\",140,2.19\n  local pest control,\"1\",110,1.7",
+          "requested_field_ids": [
+            "Ph",
+            "Po",
+            "Nq",
+            "Tr"
+          ],
+          "canonical_field_ids": null,
+          "cache_used": false,
+          "cache_time": null,
+          "success": true
+        },
+        "error": null,
+        "notes": null,
+        "business_context": null,
+        "metadata": {
+          "tool_version": "1.27.89",
+          "span_id": "01b09fc0b676061b"
+        }
+      }
+    },
+    {
+      "target": "https://shield-and-shine.abhishek-bhole123.chatgpt.site/",
+      "reportType": "url_organic",
+      "result": {
+        "success": true,
+        "data": {
+          "schedule_id": "d949ba869285588c650a2d07665c9fa00a6d6f786377d06e5bcbf079bc029a61",
+          "status": "completed",
+          "data": "[]",
+          "requested_field_ids": [
+            "Ph",
+            "Po",
+            "Nq"
+          ],
+          "canonical_field_ids": null,
+          "cache_used": false,
+          "cache_time": null,
+          "success": true
+        },
+        "error": null,
+        "notes": null,
+        "business_context": null,
+        "metadata": {
+          "tool_version": "1.27.89",
+          "span_id": "9bbfba2e48bd80b0"
+        }
+      }
+    }
+  ],
+  "exclusions": [
+    "The VBK domain-level report returned unrelated chatgpt.site hosts. Excluded from VBK analysis because the scope was not specific to this site.",
+    "Keyword overview (phrase_this) and later service-URL reports returned provider QUERY_ERROR. No keyword difficulty or missing service-keyword volume was inferred.",
+    "An empty report is not proof of zero traffic, zero rankings or a Google indexing problem."
+  ]
+}
