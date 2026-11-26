@@ -9,19 +9,19 @@
   },
   {
     "question": "What if I don’t know which pest it is?",
-    "answer": "Choose “Not sure yet” in the enquiry form and describe the signs you’ve noticed and where you’ve seen them. You don’t need to identify the pest before starting a conversation."
+    "answer": "Choose “Other / not sure” and describe the signs and where you found them. A clear photo, the time of activity and the rooms affected are useful. You do not need to identify the pest before contacting us."
   },
   {
     "question": "Do I need to leave my home during pest control?",
-    "answer": "That depends on the agreed method, product and areas treated. Before booking, ask who needs to stay away, for how long, and what ventilation or re-entry instructions apply. Tell the team about children, pets, sensitivities and anyone who may find it difficult to leave."
+    "answer": "That depends on the agreed method, product and areas treated. Before booking, ask who needs to stay away, for how long, and what ventilation or re-entry instructions apply. Tell us about children, pets, sensitivities and anyone who may find it difficult to leave."
   },
   {
     "question": "How do I get started?",
-    "answer": "Select “Get a quote”, tell us about your space, and add your contact details. Press “Send enquiry” to send your request directly to our team. You’ll see a confirmation once your submission is accepted, and you can keep a copy for your records."
+    "answer": "Choose “Get a quote” and enter your name and phone number. Property details and timing preferences are optional. After sending, the form shows whether the email service accepted your enquiry, with a reference to keep. Call or WhatsApp us if it reports a failure."
   },
   {
     "question": "Does choosing a date confirm an appointment?",
-    "answer": "Your preferred date and time are requests. The team needs to confirm service coverage, scope, pricing, and availability before an appointment is agreed."
+    "answer": "No. The date and time you select are preferences. An appointment is agreed only after we confirm the work, price and availability with you."
   },
   {
     "question": "What should a pest control quote include?",
@@ -29,38 +29,38 @@
   },
   {
     "question": "How much does pest control in Mumbai cost?",
-    "answer": "Pricing depends on the premises, pest concern, affected areas and agreed method. Ask for a quotation that identifies scope, visit frequency, follow-up and any exclusions. Confirm assessment charges and taxes before agreeing a service."
+    "answer": "The quote is based on your pest concern, property size, affected areas and number of visits. Send those details for a written price with the covered work, taxes, follow-up and exclusions listed together. An enquiry does not commit you to a booking."
   },
   {
     "question": "Is pest control safe for children and pets?",
-    "answer": "Precautions depend on the specific method and product. Tell the team about children, pets and sensitivities, and ask for preparation, ventilation, access and re-entry instructions. Do not assume every service has the same restrictions or waiting time."
+    "answer": "Children and pets need precautions specific to the product and method used. Tell us about them before the visit so preparation and re-entry instructions can be planned. Keep people, pets, food and utensils away from treatment areas as instructed; follow the product-specific waiting time."
   },
   {
     "question": "How long does pest control treatment last?",
-    "answer": "There is no universal duration. The pest, starting conditions, method, preparation and continuing exposure matter. Ask what to monitor afterwards, what follow-up is included and how new activity will be assessed."
+    "answer": "Treatment duration varies with the pest, method, level of activity and conditions around the property. Repairs, food storage, cleaning and monitoring help reduce recurrence. Keep a dated record of any new activity so we can review the affected area and the next step."
   },
   {
     "question": "What is included in a restaurant or business AMC?",
-    "answer": "The quotation should state covered premises and pests, scheduled service frequency, preparation, records, exclusions and pricing. Emergency visits and add-ons need explicit terms; they are not automatically included in every annual maintenance contract."
+    "answer": "An AMC sets out covered premises and pests, the scheduled visits, service records and the annual price. Additional call-outs, new sites, proofing and other add-ons must be listed separately in the agreement. Use the written scope to compare plans."
   },
   {
-    "question": "Do you provide emergency visits under an AMC?",
-    "answer": "Discuss availability, accepted request hours, response arrangements and any separate charges before agreeing the contract. Do not assume a guaranteed response time unless it is confirmed in writing."
+    "question": "How do I report urgent pest activity between AMC visits?",
+    "answer": "Call +91 82916 89183 or WhatsApp us with your site, the affected area and the signs you have seen. Emergency attendance, response times and extra call-out charges depend on your written AMC terms; submitting a request does not confirm a visit."
   },
   {
     "question": "Can I call or WhatsApp instead of filling in the form?",
-    "answer": "Yes. Use the Call or WhatsApp links on this page to contact VBK. Share your Mumbai area, property type, pest concern and the best time to reach you. Service availability, the quotation and appointment timing still need confirmation."
+    "answer": "Yes. Call +91 82916 89183 or use the WhatsApp link on this page. Send your area, property type and pest concern. You can also request a callback with your number and preferred time."
   },
   {
     "question": "Do you serve Mumbai and Thane?",
-    "answer": "Yes. VBK serves Mumbai and Thane, including commercial and industrial premises. Share your neighbourhood, PIN code or exact industrial unit location, property type and pest concern so access and appointment availability can be confirmed."
+    "answer": "Yes. We serve homes and businesses across Mumbai and Thane, including food premises, offices, societies and industrial properties. Include your neighbourhood or PIN code and the exact unit location for an industrial site."
   },
   {
     "question": "Can I choose monthly or quarterly visits under an annual pest control contract?",
-    "answer": "Discuss the annual contract period and visit frequency separately. Monthly, quarterly or another schedule is agreed around the premises, observations and service scope. Confirm covered pests, reporting, follow-up and charges for additional visits before accepting an AMC."
+    "answer": "Yes. You can request a monthly or quarterly schedule when enquiring about an AMC. The contract covers an agreed annual period; visit frequency is chosen around your premises and pest activity. Your quotation sets out the selected schedule and included work."
   },
   {
     "question": "Can I request restaurant pest control for a café, bakery or cloud kitchen?",
-    "answer": "Yes. Include food preparation, storage, packing and waste areas, plus operating and access hours. Ask about preparation, covered pests, monitoring records and the scope of a current-problem service or restaurant AMC."
+    "answer": "Yes. We handle enquiries for cafés, bakeries, cloud kitchens and restaurant kitchens in Mumbai and Thane. Include preparation, storage, packing and waste areas, plus access hours. Choose a current pest concern or ongoing care in the form."
   }
 ]
