@@ -1,3 +1,4 @@
+import { planningGuides } from './planning-guides.mjs';
 import { topicGuides } from './knowledge-content.mjs';
 import { launchGuides } from './launch-guides.mjs';
 import { additionalServices } from './additional-services.mjs';
@@ -9,7 +10,7 @@ export const services = [
     description: 'Seeing cockroaches in the kitchen or cupboards? Explore assessment, preparation and follow-up for your Mumbai property.',
     introduction: 'Tell us where you’re noticing activity, how often it happens, and which rooms are affected. Those details help shape a useful discussion about your space.',
     details: ['The rooms, cupboards, or common areas affected.', 'When you first noticed the issue and how often you see activity.', 'Any previous visits or treatments you want to discuss.'],
-    next: 'Share your property type and concern. The team will discuss scope, preparation, pricing, and a suitable next step with you.'
+    next: 'Share your property type and concern. We will discuss scope, preparation, pricing, and a suitable next step with you.'
   },
   {
     id: 'bed-bugs', title: 'Bed bug treatment', pest: 'Bed bugs', icon: 'i-bedbug',
@@ -25,7 +26,7 @@ export const services = [
     description: 'Discuss rat or mouse sightings, damaged packaging and possible entry points in homes, restaurants and workplaces.',
     introduction: 'Describe the signs you’ve noticed and where they occur. For a business, include the type of premises, operating hours, and areas with restricted access.',
     details: ['The areas where you’ve noticed movement or other signs.', 'Your property type and approximate size.', 'Any access, storage, or operating-hour requirements.'],
-    next: 'Start with an enquiry so the team can discuss the concern, site requirements, and the scope of an appropriate quotation.'
+    next: 'Start with an enquiry so we can discuss the concern, site requirements, and the scope of an appropriate quotation.'
   },
   {
     id: 'identify-concern', title: 'Help with an unknown pest', pest: 'Not sure yet', icon: 'i-search',
@@ -38,14 +39,7 @@ export const services = [
 ];
 
 export const guides = [
-  {
-    id: 'prepare-enquiry', title: 'What to include in a pest control enquiry', category: 'The useful details', icon: 'i-search',
-    keywords: 'prepare enquiry information first visit survey inspection assessment',
-    description: 'Prepare your property details, affected areas and observations for a pest control quote in Mumbai.',
-    introduction: 'The most useful enquiry tells us about your space and what you’ve noticed. Keep it simple; a clear description is enough to get started.',
-    details: ['Your property type, approximate size, and area or PIN code.', 'The affected rooms and how long you’ve noticed the concern.', 'A contact number and a preferred time for the team to get in touch.'],
-    next: 'You can add a preferred visit date to the form. A requested date does not confirm an appointment; the team needs to confirm availability.'
-  },
+  planningGuides[0],
   {
     id: 'choosing-care', title: 'One-off pest control or an AMC?', category: 'Finding your plan', icon: 'i-shield',
     keywords: 'annual AMC maintenance recurring regular ongoing one time single plan contract',
@@ -54,22 +48,15 @@ export const guides = [
     details: ['Choose “A current pest concern” if you want to discuss an issue now.', 'Choose “Discuss ongoing care” if you’d like to explore repeat visits or a longer-term plan.', 'Choose “Help me decide” if you want to discuss the options first.'],
     next: 'Visit frequency, coverage, follow-up terms, and pricing are discussed as part of your quotation.'
   },
-  {
-    id: 'before-visit', title: 'Pest control preparation: what to ask before a visit', category: 'Before your visit', icon: 'i-clock',
-    keywords: 'preparation visit children pets schedule timing appointment business opening hours',
-    description: 'Ask about preparation, children and pets, access restrictions, timing and follow-up before confirming a pest control visit.',
-    introduction: 'Use the conversation to understand the proposed service and your site’s needs before agreeing to a visit.',
-    details: ['Ask about the proposed approach and any preparation instructions.', 'Discuss access, operating hours, and any concerns involving children, pets, or sensitivities.', 'Confirm the quotation, requested date, and any follow-up arrangements.'],
-    next: 'Follow the specific preparation instructions provided for your agreed service. Appointment requests remain subject to confirmation.'
-  },
+  planningGuides[1],
   ...topicGuides,...launchGuides
 ];
 
 export const industryNotes = {
   'Office / retail': 'Include your opening hours, stockrooms, staff areas and access arrangements. Tell us whether you need help with a current problem or scheduled pest control.',
   'Food / hospitality': 'Describe the kitchen, food stores, waste area and times when the premises can be accessed. Include the pest activity you have recorded and any AMC requirements.',
-  'Shared / multiple sites': 'Let us know how many locations or shared areas are involved and who the team should contact about access and scope.',
-  'Other workplace': 'Every workspace has its own routine. Describe the premises, concern, and anything the team needs to know before discussing a plan.'
+  'Shared / multiple sites': 'Let us know how many locations or shared areas are involved and who we should contact about access and scope.',
+  'Other workplace': 'Every workspace has its own routine. Describe the premises, concern, and anything we need to know before discussing a plan.'
 };
 
 export function buildRecommendation({property = 'home', pest = 'Not sure yet', care = 'Help me decide'} = {}) {
@@ -81,10 +68,10 @@ export function buildRecommendation({property = 'home', pest = 'Not sure yet', c
     title: type === 'home' ? 'A calmer home starts here.' : 'Care around the way you work.',
     label: `${type === 'home' ? 'Residential' : 'Commercial'} enquiry`,
     description: knownCare === 'Discuss ongoing care'
-      ? 'Start a conversation about ongoing care for your space. Scope, visit frequency, and pricing will be discussed with the team.'
+      ? 'Start a conversation about ongoing care for your space. Scope, visit frequency, and pricing will be discussed with us.'
       : knownCare === 'A current pest concern'
-        ? 'Start with the concern you’re noticing now. Share a few details so the team can discuss an appropriate next step.'
-        : 'You don’t need to have everything worked out. Share what you’ve noticed and discuss the options with the team.'
+        ? 'Start with the concern you’re noticing now. Share a few details so we can discuss an appropriate next step.'
+        : 'You don’t need to have everything worked out. Share what you’ve noticed and discuss the options with us.'
   };
 }
 

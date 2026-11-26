@@ -1,3 +1,4 @@
+import { enquiryPayload, enquirySummary } from './enquiry-model.mjs';
 import { sendEnquiry, enquiryEmailLink, showEnquiryStatus } from './enquiry-delivery.mjs';
 import { openModal, closeModal, motionAllowed } from './dialogs.mjs';
 import { indiaDateKey, validPreferredDate } from './site-content.mjs';
@@ -217,47 +218,9 @@ function initSite() {
       $('#customer-phone').reportValidity();
       return;
     }
-    const payload = {
-      name: String(data.get('customer')).trim(),
-      phone,
-      property_type: data.get('property') === 'Business' ? 'Business' : 'Home',
-      pest_concern: data.getAll('pest').join(', ') || 'Not sure yet',
-      area: String(data.get('area') || '').trim() || 'To be discussed',
-      approximate_size: data.get('size'),
-      premises_type: String(data.get('premises_type') || '') || 'To be discussed',
-      care_preference: String(data.get('care_preference') || '') || 'Help me decide',
-      pincode: String(data.get('pincode') || '') || 'Not provided',
-      preferred_date: String(data.get('preferred_date') || '') || 'To be discussed',
-      preferred_time: String(data.get('preferred_time') || '') || 'Any time',
-      request_type: String(data.get('request_type') || '') || 'Quote request',
-      message: String(data.get('notes') || '').trim() || 'Please discuss available pest control plans with me.',
-      _subject: `New ${data.get('request_type') === 'Callback request' ? 'callback request' : data.get('request_type') === 'Coverage enquiry' ? 'coverage enquiry' : data.get('property') === 'Business' ? 'commercial enquiry' : 'residential enquiry'} — VBK`,
-      _template: 'table',
-      _url: window.location.origin+window.location.pathname,
-      _honey: String(data.get('_honey') || '')
-    };
-    const email = String(data.get('email') || '').trim();
-    if (email) { payload.email = email; payload._replyto = email; }
-    enquiryText = [
-      'VBK — ENQUIRY',
-      '',
-      `Space: ${payload.property_type}`,
-      `Request: ${payload.request_type}`,
-      `Premises: ${payload.premises_type}`,
-      `Pest concern: ${payload.pest_concern}`,
-      `Area / city: ${payload.area}`,
-      `PIN code: ${payload.pincode}`,
-      `Approximate size: ${payload.approximate_size}`,
-      `Care preference: ${payload.care_preference}`,
-      `Preferred timing: ${payload.preferred_date} · ${payload.preferred_time} (subject to confirmation)`,
-      '',
-      `Name: ${payload.name}`,
-      `Contact: ${payload.phone}`,
-      `Email: ${email || 'Not provided'}`,
-      `Additional details: ${payload.message}`,
-      '',
-      'Prepared through the VBK website.'
-    ].join('\n');
+    const payload=enquiryPayload(data);
+    payload._url=window.location.origin+window.location.pathname;
+    enquiryText=enquirySummary(payload);
     $('#enquiry-email-fallback').href=enquiryEmailLink(payload._subject,enquiryText);
     setSending(true);
     try {
@@ -266,6 +229,7 @@ function initSite() {
       showEnquiryStatus($('#quote-submission-status'),'accepted',delivery);
       window.shieldTrack?.('generate_lead');
       $('#enquiry-preview').textContent = enquiryText;
+      $('#enquiry-preview').hidden=false;
       form.hidden = true;
       result.hidden = false;
       progress.textContent = 'YOUR ENQUIRY · SUBMITTED';
@@ -274,6 +238,7 @@ function initSite() {
       dialog.scrollTop = 0;
       if (dialog.open) $('.result-message').focus({preventScroll:true});
     } catch (error) {
+      $('#enquiry-email-fallback').href=enquiryEmailLink(payload._subject,enquiryText);
       $('#quote-error-message').textContent = error.message || 'We couldn’t submit your enquiry. Please try again, or email us directly.';
       showEnquiryStatus(deliveryStatus,'failed',error);
       formError.hidden = false;
