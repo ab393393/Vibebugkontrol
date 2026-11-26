@@ -225,7 +225,7 @@ test('commercial services expose business quote routes, selected concerns and ed
     const href=page.record.quoteHref;
     assert.ok(html.includes(href.replaceAll('&','&amp;')),path+' has a real context-specific quote link');
     const url=new URL(href,'https://fixture.test');
-    assert.equal(url.pathname,'/quote');assert.equal(url.searchParams.get('property'),'Business');assert.equal(url.searchParams.get('topic'),topic);
+    assert.equal(url.pathname,'/quote');assert.equal(url.searchParams.get('property'),'business');assert.equal(url.searchParams.get('topic'),topic);
     const quote=site.render('/quote',Object.fromEntries(url.searchParams));
     const property=quote.match(/<select name="property_type"[^>]*>([\s\S]*?)<\/select>/)[1];
     assert.match(property,/<option selected="">Business<\/option>/);
@@ -277,4 +277,23 @@ test('both enquiry interfaces expose optional property and scheduling fields wit
   assert.match(site.render('/quote',{request:'callback'}),/<h2>Request a callback\.<\/h2>/);
   assert.match(documents.get('/contact'),/<a[^>]+href="\/quote\?request=callback"[^>]+data-callback/);
   assert.match(html,/<pre id="enquiry-preview" hidden(?:="")?><\/pre>/);
+});
+
+
+test('canonical content has concise unique snippets, and prefilled quote links use lowercase machine values',()=>{
+  const titles=new Set(),descriptions=new Set();
+  for(const page of site.pages){
+    assert.ok(page.title.length>=30&&page.title.length<=60,page.path+' title length');
+    assert.ok(page.description.length>=90&&page.description.length<=155,page.path+' description length');
+    titles.add(page.title);descriptions.add(page.description);
+    for(const match of documents.get(page.path).matchAll(/href="(\/quote\?[^"#]+)"/g)){
+      const href=match[1].replaceAll('&amp;','&');assert.equal(href,href.toLowerCase(),page.path+' '+href);assert.doesNotMatch(href,/%20|\s/,page.path);
+    }
+  }
+  assert.equal(titles.size,site.pages.length);assert.equal(descriptions.size,site.pages.length);
+  const quote=site.render('/quote',{property:'business',pest:'bed-bugs',topic:'office-bed-bugs',area:'thane'});
+  assert.match(quote,/<option selected="">Business<\/option>/);
+  assert.match(quote,/<input[^>]*name="pest"[^>]*checked=""[^>]*value="Bed bugs"|<input[^>]*name="pest"[^>]*value="Bed bugs"[^>]*checked=""/);
+  assert.match(quote,/name="area"[^>]*value="Thane"/);
+  assert.ok(!site.render('/quote',{topic:'amc'}).includes('value="Callback request"'));
 });

@@ -1,5 +1,6 @@
 import { pestChoices, spaceChoices, premisesChoices, careChoices, timeChoices } from '../public/enquiry-model.mjs';
-import { extraServices } from '../lib/catalog.mjs';
+import { pestFromQuery, quoteHref } from '../public/quote-context.mjs';
+import { extraServices, areaPages } from '../lib/catalog.mjs';
 import { services } from '../public/site-content.mjs';
 import { breadcrumbs, servicePaths } from '../lib/pages.mjs';
 import { siteConfig } from '../lib/site-config';
@@ -17,7 +18,7 @@ import { GuideBody, GuideDirectory, TopicLibrary, ResearchHub, ResearchStandards
 
 function Arrow() { return <svg className="icon" data-icon="inline-end" aria-hidden="true"><use href="#i-arrow" /></svg>; }
 function Enquire({page}:{page:any}) {
-  const href=page.record?.quoteHref||(page.kind==='service'?'/quote?pest='+encodeURIComponent(page.record.pest||page.record.title):['commercial','amc'].includes(page.kind)?'/quote?property=Business'+(page.kind==='amc'?'&topic=AMC':''):'/quote');
+  const href=page.record?.quoteHref||(page.kind==='service'?quoteHref({pest:page.record.pest||page.record.title}):['commercial','amc'].includes(page.kind)?quoteHref({property:'business',topic:page.kind==='amc'?'amc':''}):'/quote');
   return <a className="button button-dark" href={href}>Get a quote <Arrow /></a>;
 }
 function ServiceLinks() {
@@ -28,11 +29,13 @@ function FAQList() {
 }
 function ContactForm({query={}}:{query?:any}) {
   const business=siteConfig().business;
-  const property=query.property==='Business'||query['finder-property']==='business'?'Business':'Home';
+  const property=String(query.property||query['finder-property']||'').toLowerCase()==='business'?'Business':'Home';
   const requestedPest=query.pest||query['finder-pest'];
-  const concern=pestChoices.includes(requestedPest)?requestedPest:'Other / not sure';
+  const concern=pestFromQuery(requestedPest);
   const callback=query.request==='callback';
-  const topicMessage=query.topic==='AMC'?'I would like to discuss an annual maintenance contract for my business.':commercialServices.find(service=>service.quoteTopic===query.topic)?.enquiryMessage||'';
+  const topic=String(query.topic||'').toLowerCase();
+  const topicMessage=topic==='amc'?'I would like to discuss an annual maintenance contract for my business.':commercialServices.find(service=>service.quoteTopic===topic)?.enquiryMessage||'';
+  const area=typeof query.area==='string'?areaPages.find(record=>record.slug===query.area.toLowerCase()||record.name.toLowerCase()===query.area.toLowerCase())?.name||query.area.slice(0,100):'';
   const care=careChoices.includes(query['finder-care'])?query['finder-care']:'Help me decide';
   return <form id="contact-page-form" className="contact-page-form" action="/api/enquiries" method="post">
     <h2>{callback?'Request a callback.':<>Tell us about <em>your space.</em></>}</h2><p>Your name and phone number are all we need to get started. Add any details you know below.</p>
@@ -40,7 +43,7 @@ function ContactForm({query={}}:{query?:any}) {
     <input name="_honey" type="text" autoComplete="off" tabIndex={-1} hidden aria-hidden="true" />
     <div className="form-row"><label className="field-label">Your name <span className="required-label">Required</span><input name="name" autoComplete="name" required maxLength={100} /></label><label className="field-label">Contact number <span className="required-label">Required</span><input name="phone" type="tel" autoComplete="tel" required minLength={7} maxLength={25} /></label></div>
     <label className="field-label">Email address <span className="optional">Optional</span><input name="email" type="email" autoComplete="email" maxLength={254} /></label>
-    <div className="form-row"><label className="field-label">Your space<select name="property_type" defaultValue={property}><option>Home</option><option>Business</option></select></label><label className="field-label">Your area / city <span className="optional">Optional</span><input name="area" defaultValue={typeof query.area==='string'?query.area.slice(0,100):''} autoComplete="address-level2" maxLength={100} /></label></div>
+    <div className="form-row"><label className="field-label">Your space<select name="property_type" defaultValue={property}><option>Home</option><option>Business</option></select></label><label className="field-label">Your area / city <span className="optional">Optional</span><input name="area" defaultValue={area} autoComplete="address-level2" maxLength={100} /></label></div>
     <fieldset><legend>What are you noticing? <span className="optional">Choose all that apply</span></legend><div className="pest-options">{pestChoices.map(pest=><label key={pest}><input type="checkbox" name="pest" value={pest} defaultChecked={pest===concern} /><span>{pest}</span></label>)}</div></fieldset>
     <div className="form-row"><label className="field-label">Approximate space <span className="optional">Optional</span><select name="approximate_size" defaultValue="Not specified">{spaceChoices.map(size=><option key={size} value={size}>{size==='Not specified'?'Select size (optional)':size}</option>)}</select></label><label className="field-label">Property type <span className="optional">Optional</span><select name="premises_type" defaultValue=""><option value="">Select type (optional)</option>{premisesChoices.map(([family,type])=><option data-family={family} key={type}>{type}</option>)}</select></label></div>
     <div className="form-row"><label className="field-label">PIN code <span className="optional">Optional</span><input name="pincode" inputMode="numeric" pattern="[0-9]{6}" minLength={6} maxLength={6} autoComplete="postal-code" /></label><label className="field-label">Care preference<select name="care_preference" defaultValue={care}>{careChoices.map(value=><option key={value}>{value}</option>)}</select></label></div>
