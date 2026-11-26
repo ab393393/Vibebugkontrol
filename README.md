@@ -93,7 +93,7 @@ A selected critical subset is inlined from `public/critical.css`. The remaining
 stylesheet is one regular stylesheet request to preserve rendering order. The
 browser modules are bundled/minified into `public/site.js`, loaded as a deferred
 ES module. Initial hero opacity animations were removed to keep primary content
-visible. No new motion library was added. Native features and form submission do
+visible. GSAP, Motion and Lenis are loaded through a separate homepage module; React Three Fiber loads the decorative shield only when visible and WebGL is available. Native features and form submission do
 not depend on the script loading first.
 
 Existing responsive WebP images retain alt text, dimensions, eager priority for
@@ -102,11 +102,17 @@ the hero and lazy loading below the fold. SVG, PNG favicon, apple touch icon,
 `scripts/prepare-public.mjs`; the PNG files are checked into source and require
 no image conversion tool on your local machine.
 
-Core Web Vitals have not been measured. Browser visual QA and real-phone testing
-remain pending because the managed browser could not access the preview. Static
-asset sizes, server rendering and code tests are not Lighthouse or field scores.
-After the domain is confirmed, measure mobile/desktop PageSpeed and real-user
-LCP, INP and CLS; use Search Console when enough traffic data is available.
+Core Web Vitals have not been measured. Automated checks and desktop browser QA
+cover the motion controls, gallery, dialog scroll restoration and static shield
+fallback. The test browser disables WebGL, so the actual 3D scene still needs a
+WebGL-capable device check. See `docs/premium-motion-2026-11-25.md` for details.
+
+## GitHub and staging
+
+The source repository is https://github.com/ab393393/Vibebugkontrol.
+`main` contains the production-compatible application. `staging` contains the
+same application with the separate staging Site identity. See `docs/STAGING.md`
+for environment configuration and the review workflow.
 
 ## Tracking and enquiry delivery
 
@@ -219,7 +225,6 @@ duplicate-click protection and retry. It does not prove live inbox receipt.
 ## Brand name
 
 The business is VBK, short for Vibe Bug Kontrol. The visible brand, enquiry messages, page metadata and structured data use this name. Existing technical identifiers, token property names, fonts and the hosting URL retain their original names for compatibility.
-
 
 ## Content and enquiry refresh — 26 November 2026
 
