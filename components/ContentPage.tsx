@@ -1,3 +1,4 @@
+import { pestChoices, spaceChoices, premisesChoices, careChoices, timeChoices } from '../public/enquiry-model.mjs';
 import { extraServices } from '../lib/catalog.mjs';
 import { services } from '../public/site-content.mjs';
 import { breadcrumbs, servicePaths } from '../lib/pages.mjs';
@@ -29,21 +30,27 @@ function ContactForm({query={}}:{query?:any}) {
   const business=siteConfig().business;
   const property=query.property==='Business'||query['finder-property']==='business'?'Business':'Home';
   const requestedPest=query.pest||query['finder-pest'];
-  const concern=[...services,...extraServices].some(service=>(service.pest||service.title)===requestedPest)?requestedPest:'Other / not sure';
+  const concern=pestChoices.includes(requestedPest)?requestedPest:'Other / not sure';
+  const callback=query.request==='callback';
   const topicMessage=query.topic==='AMC'?'I would like to discuss an annual maintenance contract for my business.':commercialServices.find(service=>service.quoteTopic===query.topic)?.enquiryMessage||'';
+  const care=careChoices.includes(query['finder-care'])?query['finder-care']:'Help me decide';
   return <form id="contact-page-form" className="contact-page-form" action="/api/enquiries" method="post">
-    <h2>Tell us about <em>your space.</em></h2><p>Share a few details. We’ll use them to respond to this enquiry. Your submission status will appear here.</p>
-    <input type="hidden" name="request_type" value={query.request==='callback'?'Callback request':'Quote request'} /><input type="hidden" name="preferred_time" value="Any time" /><input type="hidden" name="care_preference" value={typeof query['finder-care']==='string'?query['finder-care'].slice(0,100):'Help me decide'} />
+    <h2>{callback?'Request a callback.':<>Tell us about <em>your space.</em></>}</h2><p>Your name and phone number are all we need to get started. Add any details you know below.</p>
+    <input type="hidden" name="request_type" value={callback?'Callback request':'Quote request'} />
     <input name="_honey" type="text" autoComplete="off" tabIndex={-1} hidden aria-hidden="true" />
     <div className="form-row"><label className="field-label">Your name <span className="required-label">Required</span><input name="name" autoComplete="name" required maxLength={100} /></label><label className="field-label">Contact number <span className="required-label">Required</span><input name="phone" type="tel" autoComplete="tel" required minLength={7} maxLength={25} /></label></div>
     <label className="field-label">Email address <span className="optional">Optional</span><input name="email" type="email" autoComplete="email" maxLength={254} /></label>
     <div className="form-row"><label className="field-label">Your space<select name="property_type" defaultValue={property}><option>Home</option><option>Business</option></select></label><label className="field-label">Your area / city <span className="optional">Optional</span><input name="area" defaultValue={typeof query.area==='string'?query.area.slice(0,100):''} autoComplete="address-level2" maxLength={100} /></label></div>
-    <label className="field-label">Pest concern<select name="pest_concern" defaultValue={concern}><option>Cockroaches</option><option>Bed bugs</option><option>Rodents</option><option>Other / not sure</option>{extraServices.map(service=><option key={service.id}>{service.pest||service.title}</option>)}</select></label>
-    <label className="field-label">What would you like to discuss?<textarea name="message" defaultValue={topicMessage} rows={4} maxLength={1000} placeholder="Your pest concern, affected areas, or a question for us…" /></label>
+    <fieldset><legend>What are you noticing? <span className="optional">Choose all that apply</span></legend><div className="pest-options">{pestChoices.map(pest=><label key={pest}><input type="checkbox" name="pest" value={pest} defaultChecked={pest===concern} /><span>{pest}</span></label>)}</div></fieldset>
+    <div className="form-row"><label className="field-label">Approximate space <span className="optional">Optional</span><select name="approximate_size" defaultValue="Not specified">{spaceChoices.map(size=><option key={size} value={size}>{size==='Not specified'?'Select size (optional)':size}</option>)}</select></label><label className="field-label">Property type <span className="optional">Optional</span><select name="premises_type" defaultValue=""><option value="">Select type (optional)</option>{premisesChoices.map(([family,type])=><option data-family={family} key={type}>{type}</option>)}</select></label></div>
+    <div className="form-row"><label className="field-label">PIN code <span className="optional">Optional</span><input name="pincode" inputMode="numeric" pattern="[0-9]{6}" minLength={6} maxLength={6} autoComplete="postal-code" /></label><label className="field-label">Care preference<select name="care_preference" defaultValue={care}>{careChoices.map(value=><option key={value}>{value}</option>)}</select></label></div>
+    <label className="field-label">Anything we should know? <span className="optional">Optional</span><textarea name="message" defaultValue={topicMessage} rows={4} maxLength={1000} placeholder="Affected rooms, signs you’ve noticed, or a question for us…" /></label>
+    <div className="form-row"><label className="field-label">{callback?'Preferred callback date':'Preferred visit date'} <span className="optional">Optional</span><input name="preferred_date" type="date" aria-describedby="contact-date-help" /></label><label className="field-label">Preferred time<select name="preferred_time" defaultValue="Any time">{timeChoices.map(time=><option key={time}>{time}</option>)}</select></label></div>
+    <p id="contact-date-help" className="form-help">Your date and time are requests. We’ll confirm availability with you.</p>
     <p className="privacy-note">By sending, you agree to be contacted about this enquiry. Read our <a href="/privacy-policy">privacy policy</a>.</p>
     <div className="form-error" id="contact-error" role="alert" tabIndex={-1} hidden><p /><a data-enquiry-email href="/contact">Email this enquiry ↗</a><div dangerouslySetInnerHTML={{__html:enquiryFallbackHtml(business)}} /></div>
     <Button type="submit" variant="shield" size="brand"><span>Send enquiry</span><Arrow /></Button>
-    <p id="contact-status" className="form-help enquiry-status" role="status" aria-live="polite" data-state="idle">Status: Ready to send.</p>
+    <p id="contact-status" className="form-help enquiry-status" role="status" aria-live="polite" data-state="idle" hidden />
     <p id="contact-success" className="contact-success" tabIndex={-1} hidden />
   </form>;
 }
@@ -85,18 +92,18 @@ export function ContentPage({page,query={}}:{page:any;query?:any}) {
       {page.kind==='commercial'&&<CommercialServiceLinks />}
       {page.kind==='amc'&&<><AMCContent /><div className="page-actions"><Enquire page={page} /></div></>}
       {page.kind==='area'&&<AreaContent record={page.record} />}
-      {page.kind==='quote'&&<div className="quote-page-layout"><ContactForm query={query} /><aside className="article-aside"><h2>A clear <em>next step.</em></h2><p>Share the concern and your property details. The team will discuss scope, service availability, preparation, pricing and requested timing before a visit is confirmed.</p><p>For a commercial contract, include operating hours, locations and access requirements.</p><a className="text-link" href="/commercial/amc">Explore business AMC plans ↗</a><a className="text-link" href="/faq">Cost, safety and timing questions ↗</a></aside></div>}
+      {page.kind==='quote'&&<div className="quote-page-layout"><ContactForm query={query} /><aside className="article-aside"><h2>A clear <em>next step.</em></h2><p>Share the concern and your property details. We’ll explain the proposed work, preparation and price before you agree to a visit.</p><p>For a commercial contract, include operating hours, locations and access requirements.</p><a className="text-link" href="/commercial/amc">Explore business AMC plans ↗</a><a className="text-link" href="/faq">Cost, safety and timing questions ↗</a></aside></div>}
       {page.kind==='guides'&&<GuideDirectory />}
       {page.kind==='topics'&&<TopicLibrary />}
       {page.kind==='research'&&<ResearchHub />}
       {page.kind==='standards'&&<ResearchStandards />}
       {page.kind==='report'&&<ResearchReportBody record={page.record} />}
       {page.kind==='faq'&&<div className="faq-page-content"><FAQList /><section className="page-callout"><h2>Have a different <em>question?</em></h2><Enquire page={page} /></section></div>}
-      {page.kind==='contact'&&<div className="contact-layout"><aside><h2>Let’s talk about<br /><em>your space.</em></h2><div dangerouslySetInnerHTML={{__html:businessFooter(business)}} /><div className="contact-option"><h3>Prefer a conversation?</h3><p>Leave your number and a requested callback time.</p><button className="text-link" data-callback>Request a callback <Arrow /></button></div><div className="contact-option"><h3>Check your area</h3><p>Share your area or PIN code so the team can discuss availability.</p><button className="text-link" data-coverage>Ask about coverage <Arrow /></button></div><p className="contact-footnote">Service availability, quotation and requested timing are confirmed with the team.</p></aside><ContactForm /></div>}
+      {page.kind==='contact'&&<div className="contact-layout"><aside><h2>Let’s talk about<br /><em>your space.</em></h2><div dangerouslySetInnerHTML={{__html:businessFooter(business)}} /><div className="contact-option"><h3>Prefer a conversation?</h3><p>Leave your number and a requested callback time.</p><a className="text-link" href="/quote?request=callback" data-callback>Request a callback <Arrow /></a></div><div className="contact-option"><h3>Check your area</h3><p>We serve Mumbai and Thane. Share your neighbourhood or PIN code with your enquiry.</p><a className="text-link" href="/quote" data-coverage>Ask about coverage <Arrow /></a></div><p className="contact-footnote">We’ll confirm the quotation and appointment with you.</p></aside><ContactForm /></div>}
       {page.kind==='contact'&&<div dangerouslySetInnerHTML={{__html:serviceAreasHtml(business).replace('section container','')}} />}
       {page.kind==='privacy'&&<Privacy />}
       <RelatedReading path={page.path} />
     </div>
-    {page.kind!=='privacy'&&<nav className="page-end-links container" aria-label="More from VBK"><a href="/services">Our services ↗</a><a href="/residential">For your home ↗</a><a href="/commercial">For your business ↗</a><a href="/guides">Useful guides ↗</a><a href="/pest-library">Pest library ↗</a><a href="/research">Research &amp; evidence ↗</a><a href="/contact">Contact us ↗</a></nav>}
+    {page.kind!=='privacy'&&<nav className="page-end-links container" aria-label="More from VBK"><a href="/services">Our services ↗</a><a href="/residential">For your home ↗</a><a href="/commercial">For your business ↗</a><a href="/guides">Useful guides ↗</a><a href="/pest-library">Pest library ↗</a><a href="/research">Standards &amp; sources ↗</a><a href="/contact">Contact us ↗</a></nav>}
   </main>;
 }
