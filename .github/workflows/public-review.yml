@@ -1,0 +1,167 @@
+name: Publish public website review
+
+'on':
+  push:
+    branches: [public-review]
+    paths: [.github/workflows/public-review.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages-review
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Prepare review tools
+        run: |
+          python3 -m venv .review-venv
+          .review-venv/bin/python -m pip install beautifulsoup4==4.13.4
+      - name: Capture the public pages without submitting enquiries
+        env:
+          REVIEW_BASE: ${{ steps.pages.outputs.base_url }}
+        run: |
+          .review-venv/bin/python - <<'PY'
+          import concurrent.futures, json, os, re, shutil, subprocess
+          from pathlib import Path
+          from urllib.parse import urlsplit, urlunsplit
+          from bs4 import BeautifulSoup
+
+          live = 'https://vibebugkontrol.abhishek-bhole123.workers.dev'
+          base = os.environ['REVIEW_BASE'].rstrip('/')
+          assert urlsplit(base).scheme == 'https' and urlsplit(base).hostname.endswith('.github.io')
+          prefix = urlsplit(base).path.rstrip('/')
+          out = Path('review-dist')
+          out.mkdir(exist_ok=True)
+          shutil.copytree('public', out / 'public', dirs_exist_ok=True)
+          routes = json.loads(subprocess.check_output([
+              'node', '--input-type=module', '-e',
+              "import{pages}from'./lib/pages.mjs';console.log(JSON.stringify(pages.map(p=>p.path)))"
+          ], text=True))
+          public_files = {'/' + str(p.relative_to('public')) for p in Path('public').rglob('*') if p.is_file()}
+          route_set = set(routes)
+
+          def asset_url(value):
+              return re.sub(r'(?<![\w./:-])/assets/', prefix + '/public/assets/', value)
+
+          def link_url(value):
+              if not value.startswith('/') or value.startswith('//'):
+                  return value
+              u = urlsplit(value)
+              if u.path.startswith(prefix + '/'):
+                  return value
+              if u.path in public_files:
+                  path = prefix + '/public' + u.path
+              elif u.path in route_set:
+                  path = prefix + u.path.rstrip('/') + '/'
+              else:
+                  return live + value
+              return urlunsplit(('', '', path, u.query, u.fragment))
+
+          # Relative font/image references continue to resolve within public/.
+          for css in (out / 'public').glob('*.css'):
+              css.write_text(asset_url(css.read_text()))
+          for js in (out / 'public').glob('*.js'):
+              js.write_text(js.read_text().replace('"/motion-runtime/"', json.dumps(prefix + '/public/motion-runtime/')))
+
+          guard = """document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(a&&new URL(a.href).pathname.replace(/\\/$/,'')===QUOTE)e.stopImmediatePropagation()},true);document.addEventListener('submit',e=>{if(e.target.method.toLowerCase()==='post'){e.preventDefault();e.stopImmediatePropagation();location.assign(LIVE)}},true);"""
+          guard = 'const QUOTE=' + json.dumps(prefix + '/quote') + ';const LIVE=' + json.dumps(live + '/quote') + ';' + guard
+          (out / 'review-guard.js').write_text(guard)
+
+          def capture(route):
+              # curl uses its own truthful application identity; no cookies, tokens or browser impersonation.
+              html = subprocess.check_output(['curl', '--fail', '--silent', '--show-error', '--max-time', '45', live + route], text=True)
+              soup = BeautifulSoup(html, 'html.parser')
+              assert soup.title and len(soup.find_all('h1')) == 1, route
+              for script in list(soup.find_all('script')):
+                  if script.get('type') == 'application/ld+json':
+                      continue
+                  if urlsplit(script.get('src', '')).path == '/site.js':
+                      script['src'] = link_url(script['src'])
+                  else:
+                      script.decompose()
+              for link in list(soup.find_all('link')):
+                  if '/_next/' in link.get('href', '') or 'manifest' in link.get('rel', []):
+                      link.decompose()
+              for tag in soup.find_all(True):
+                  for key in ['href', 'src', 'action', 'poster']:
+                      if tag.get(key) and key != 'action' and not (tag.name == 'link' and 'canonical' in tag.get('rel', [])):
+                          tag[key] = link_url(tag[key])
+                  if tag.get('srcset'):
+                      tag['srcset'] = asset_url(tag['srcset'])
+                  if tag.get('style'):
+                      tag['style'] = asset_url(tag['style'])
+              for style in soup.find_all('style'):
+                  style.string = asset_url(style.get_text())
+              motion = soup.find('meta', attrs={'name': 'vbk-motion-module'})
+              if motion:
+                  motion['content'] = link_url(motion['content'])
+              for meta in soup.find_all('meta', attrs={'name': 'robots'}):
+                  meta.decompose()
+              soup.head.append(soup.new_tag('meta', attrs={'name': 'robots', 'content': 'noindex, follow'}))
+              soup.head.append(soup.new_tag('meta', attrs={'name': 'review-source', 'content': live + route}))
+              guard_tag = soup.new_tag('script', src=prefix + '/review-guard.js')
+              soup.head.insert(0, guard_tag)
+              notice = soup.new_tag('aside', attrs={'role': 'note', 'style': 'padding:10px 20px;background:#edf3d8;color:#153f31;text-align:center;font:14px/1.5 system-ui'})
+              notice.string = 'Read-only website review copy. Page content and original SEO metadata were captured from the live site; noindex applies to this copy. '
+              a = soup.new_tag('a', href=live + route)
+              a.string = 'Open the live website'
+              notice.append(a)
+              soup.body.insert(0, notice)
+              for form in soup.find_all('form'):
+                  if form.get('method', '').lower() != 'post':
+                      form['action'] = link_url(form.get('action', '/quote'))
+                      continue
+                  form['action'] = live + '/quote'
+                  form['method'] = 'get'
+                  for control in form.find_all(['input', 'select', 'textarea', 'button']):
+                      control['disabled'] = ''
+                  note = soup.new_tag('p')
+                  note.string = 'Review copy: these fields are shown for inspection. To send an enquiry, use the live form.'
+                  form.insert(0, note)
+                  a = soup.new_tag('a', href=live + '/quote', attrs={'class': 'button button-primary'})
+                  a.string = 'Open live enquiry form'
+                  form.append(a)
+              target = out / route.strip('/') / 'index.html' if route != '/' else out / 'index.html'
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_text(str(soup))
+              return route
+
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+              for route in pool.map(capture, routes):
+                  print('Captured', route)
+          (out / 'robots.txt').write_text('User-agent: *\nAllow: /\n')
+          (out / 'llms.txt').write_text('# VBK website review copy\n\nRead-only rendered pages for content and design review. Enquiries use the live website. Original SEO metadata is retained; noindex is added only for the review copy.\n\n' + '\n'.join('- ' + base + route.rstrip('/') + '/' for route in routes) + '\n')
+          print('Prepared', len(routes), 'read-only pages at', base)
+          PY
+      - name: Upload review pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: review-dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: public-review
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish review copy
+        id: deployment
+        uses: actions/deploy-pages@v4
