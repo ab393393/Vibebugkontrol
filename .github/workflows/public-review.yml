@@ -77,8 +77,8 @@ jobs:
           for js in (out / 'public').glob('*.js'):
               js.write_text(js.read_text().replace('"/motion-runtime/"', json.dumps(prefix + '/public/motion-runtime/')))
 
-          guard = """document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(a&&new URL(a.href).pathname.replace(/\\/$/,'')===QUOTE)e.stopImmediatePropagation()},true);document.addEventListener('submit',e=>{if(e.target.method.toLowerCase()==='post'){e.preventDefault();e.stopImmediatePropagation();location.assign(LIVE)}},true);"""
-          guard = 'const QUOTE=' + json.dumps(prefix + '/quote') + ';const LIVE=' + json.dumps(live + '/quote') + ';' + guard
+          guard = """document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(a&&new URL(a.href).pathname.replace(/\\/$/,'')===QUOTE)e.stopImmediatePropagation()},true);document.addEventListener('submit',e=>{if(e.target.method.toLowerCase()==='post'||e.target.action===LIVE){e.preventDefault();e.stopImmediatePropagation();location.assign(LIVE)}},true);"""
+          guard = 'window.vbkInteractionsReady=true;const QUOTE=' + json.dumps(prefix + '/quote') + ';const LIVE=' + json.dumps(live + '/quote') + ';' + guard
           (out / 'review-guard.js').write_text(guard)
 
           def capture(route):
