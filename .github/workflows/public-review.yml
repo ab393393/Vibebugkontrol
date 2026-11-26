@@ -1,6 +1,6 @@
 name: Publish public website review
 # Keep the read-only review copy in sync when its source branch changes.
-# Capture the verified published site while the separate Workers deployment is being repaired.
+# Capture the public production Worker and preserve read-only review forms.
 
 'on':
   push:
@@ -41,7 +41,7 @@ jobs:
           from urllib.parse import urlsplit, urlunsplit
           from bs4 import BeautifulSoup
 
-          live = 'https://shield-and-shine.abhishek-bhole123.chatgpt.site'
+          live = 'https://vibebugkontrol.abhishek-bhole123.workers.dev'
           base = os.environ['REVIEW_BASE'].rstrip('/')
           assert urlsplit(base).scheme == 'https' and urlsplit(base).hostname.endswith('.github.io')
           prefix = urlsplit(base).path.rstrip('/')
