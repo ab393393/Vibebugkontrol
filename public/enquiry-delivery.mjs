@@ -8,6 +8,7 @@ export function enquiryCopyRecipients(value=[],recipient='') {
 
 const deliveryFields=new Set(['name','phone','email','property_type','pest_concern','area','approximate_size','premises_type','care_preference','pincode','preferred_date','preferred_time','request_type','message','enquiry_reference','_honey','_subject','_template','_url','_replyto','_cc']);
 const referencePattern=/^SS-[A-F0-9]{12}$/;
+let preparedContact;
 export const ENQUIRY_ACCEPTED_MESSAGE='Enquiry sent. Thank you for contacting VBK. The email service accepted your enquiry for delivery. Requested visits remain subject to confirmation.';
 export function enquiryFailure(message,code='DELIVERY_UNCONFIRMED',reference='') {
   return Object.assign(new Error(message),{code,reference:referencePattern.test(reference)?reference:''});
@@ -33,14 +34,16 @@ export async function formSubmitAcknowledgement(response,reference='') {
 
 export function showEnquiryStatus(node,state,details={}) {
   if(!node)return;
-  const labels={idle:'Ready to send.',validating:'Checking your details…',sending:'Sending enquiry…',accepted:'Sent — accepted for email delivery.',failed:details.code==='ACTIVATION_REQUIRED'?'Not sent — email activation required.':'Submission failed — delivery not confirmed.'};
+  node.hidden=state==='idle';
+  if(state==='idle'){node.dataset.state=state;node.textContent='';return;}
+  const labels={validating:'Checking your details…',sending:'Sending enquiry…',accepted:'Sent — accepted for email delivery.',failed:details.code==='ACTIVATION_REQUIRED'?'Not sent — email activation required.':'Submission failed — delivery not confirmed.'};
   node.dataset.state=state;
   const reference=referencePattern.test(details.reference)?` Reference: ${details.reference}.`:'';
   const code=state==='failed'&&/^[A-Z_]{3,40}$/.test(details.code||'')?` Code: ${details.code}.`:'';
   node.textContent=`Status: ${labels[state]||labels.failed}${reference}${code}`;
 }
 
-export function enquiryEmailLink(subject,text,email=globalThis.document?.querySelector('meta[name="shield-business-email"]')?.content||'',copies=globalThis.document?.querySelector('meta[name="shield-enquiry-cc"]')?.content?.split(',')||[]) {
+export function enquiryEmailLink(subject,text,email=preparedContact?.email||globalThis.document?.querySelector('.business-footer-details a[href^="mailto:"]')?.getAttribute('href')?.slice(7).split('?')[0]||'',copies=preparedContact?.copies||[]) {
   if(!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email))return '/contact';
   const cc=enquiryCopyRecipients(copies,email);
   return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}${cc.length?'&cc='+encodeURIComponent(cc.join(',')):''}`;
@@ -65,6 +68,7 @@ export async function sendEnquiry(fields, { fetchImpl = globalThis.fetch, timeou
     reference=referencePattern.test(acknowledgement?.reference)?acknowledgement.reference:'';
     if(response.status===202&&acknowledgement?.success===false&&acknowledgement?.code==='PROVIDER_AJAX') {
       const delivery=validateFormSubmitDelivery(acknowledgement.delivery);
+      preparedContact={email:decodeURIComponent(new URL(delivery.url).pathname.slice('/ajax/'.length)),copies:delivery.fields._cc?.split(',')||[]};
       reference=delivery.fields.enquiry_reference;
       onStatus('sending',{reference});
       const providerResponse=await fetchImpl(delivery.url,{

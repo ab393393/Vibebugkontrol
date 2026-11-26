@@ -40,7 +40,7 @@ export function PageSchema({ page }: { page:any }) {
   if(page.kind==='guide' && page.record.published) items.push({
     '@context':'https://schema.org','@type':'Article','@id':origin+page.path+'#article',
     headline:page.record.title,description:page.record.description,
-    datePublished:page.record.published,dateModified:page.record.published,
+    datePublished:page.record.published,dateModified:page.record.modified||page.record.published,
     author:{'@id':origin+'/#organization'},publisher:{'@id':origin+'/#organization'},
     mainEntityOfPage:{'@id':origin+page.path+'#webpage'},inLanguage:'en-IN',
     citation:page.record.sourceIds.map((id:keyof typeof knowledgeSources)=>knowledgeSources[id].url),

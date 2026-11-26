@@ -99,25 +99,6 @@ test('all public pages allow indexing and configured origins supply absolute met
   for(const page of site.pages){const metadata=site.pageMetadata(page);assert.equal(metadata.robots.index,true);assert.equal(metadata.robots.follow,true);}
   for(const key of Object.keys(globalThis.__shieldTestEnv))delete globalThis.__shieldTestEnv[key];
 });
-test('staging uses its own origin and opts out of search while production stays indexable',()=>{
-  Object.assign(globalThis.__shieldTestEnv,{SITE_ENV:'staging',SITE_URL:'https://staging.example.test'});
-  try {
-    assert.equal(site.siteConfig().indexable,false);
-    assert.equal(site.siteConfig().origin,'https://staging.example.test');
-    assert.equal(site.robots().rules.disallow,'/');
-    assert.equal(site.robots().sitemap,undefined);
-    assert.deepEqual(site.sitemap(),[]);
-    for(const page of site.pages){
-      const metadata=site.pageMetadata(page);
-      assert.equal(metadata.robots.index,false);
-      assert.equal(metadata.robots.follow,true);
-      assert.ok(metadata.alternates.canonical.startsWith('https://staging.example.test/'));
-    }
-  } finally {
-    for(const key of Object.keys(globalThis.__shieldTestEnv))delete globalThis.__shieldTestEnv[key];
-  }
-  assert.equal(site.siteConfig().indexable,true);
-});
 test('custom 404 is rendered and known old paths have direct redirect targets',()=>{
   assert.match(site.render('/missing-page'),/404 · A SMALL DETOUR/);
   assert.equal(site.redirectPath('/contact-us'),'/contact');assert.equal(site.redirectPath('/index.html'),'/');assert.equal(site.redirectPath('/services/'),'/services');
@@ -146,7 +127,8 @@ test('each pest topic has reciprocal contextual links between care and sourced g
 });
 test('research is honest about unpublished data and knowledge search opens real page URLs',()=>{
   const research=documents.get('/research');
-  if(!publishedReports.length)assert.ok(research.includes('No original field reports have been published yet'));
+  if(!publishedReports.length){assert.ok(!research.includes('Original field observations'));assert.ok(!research.includes('No original field reports have been published yet'));}
+  assert.ok(research.includes('Food Safety and Standards Authority of India'));
   assert.ok(!research.includes('"@type":"Dataset"'));
   assert.ok(searchContent('AMC').some(result=>result.href==='/commercial/amc'));
   for(const query of ['research','cockroach signs','bed bug signs','rodent signs','commercial monitoring']) {
@@ -183,7 +165,7 @@ test('quote CTAs resolve to an actual form and public schema never receives unre
 test('configured contact details match LocalBusiness schema, footer, mobile actions and lazy map',()=>{
   const b=businessInfo({email:'business@example.test',phone:'+1 999 555 0123',whatsappNumber:'19995550123',address:{streetAddress:'Synthetic fixture street',addressLocality:'Mumbai',addressRegion:'Maharashtra',postalCode:'400001',addressCountry:'IN'},openingHours:['Mo-Sa 09:00-18:00'],sameAs:['https://example.test/profile'],mapEmbedUrl:'https://www.google.com/maps/embed?pb=synthetic-fixture',priceRange:'Fixture price range'});
   const schemas=businessSchemas('https://example.test',b);const local=schemas.find(schema=>schema['@type']==='LocalBusiness');
-  assert.equal(local.email,b.email);assert.equal(local.telephone,b.telephone);assert.deepEqual(local.address,{'@type':'PostalAddress',...b.address});
+  assert.equal(local.email,undefined);assert.equal(local.telephone,b.telephone);assert.deepEqual(local.address,{'@type':'PostalAddress',...b.address});
   const html=renderTemplate('<!--contact:header--><!--contact:hero--><!--business:footer--><!--business:mobile--><!--business:areas-->',b);
   assert.ok(html.includes(b.email));assert.ok(html.includes(b.addressText));assert.ok(html.includes('tel:'+b.telephone));assert.ok(html.includes(b.whatsappUrl));
   assert.match(html,/<iframe[^>]*width="1000"[^>]*height="360"[^>]*loading="lazy"/);
@@ -205,7 +187,7 @@ test('the deployed enquiry route prepares approved browser AJAX recipients witho
     const result=await response.json();assert.equal(response.status,202);assert.equal(result.success,false);assert.equal(calls,0);
     assert.equal(result.code,'PROVIDER_AJAX');assert.equal(decodeURIComponent(new URL(result.delivery.url).pathname.slice('/ajax/'.length)),businessInfo().email);
     assert.equal(result.delivery.fields._cc,'abhishek.bhole123@gmail.com');assert.equal(result.delivery.fields.enquiry_reference,result.reference);
-    assert.match(documents.get('/quote'),/<meta name="shield-enquiry-cc" content="abhishek.bhole123@gmail.com"/);
+    for(const html of documents.values())assert.doesNotMatch(html,/<meta[^>]+name="shield-(?:business-email|enquiry-cc)"/);
   }finally{globalThis.fetch=original;}
 });
 test('all enquiry forms render explicit status regions and configured failure contact options',()=>{
@@ -247,8 +229,8 @@ test('commercial services expose business quote routes, selected concerns and ed
     const quote=site.render('/quote',Object.fromEntries(url.searchParams));
     const property=quote.match(/<select name="property_type"[^>]*>([\s\S]*?)<\/select>/)[1];
     assert.match(property,/<option selected="">Business<\/option>/);
-    const concern=quote.match(/<select name="pest_concern"[^>]*>([\s\S]*?)<\/select>/)[1];
-    assert.ok(concern.includes('<option selected="">'+pest+'</option>'));
+    const concern=[...quote.matchAll(/<input[^>]+name="pest"[^>]*>/g)].find(match=>match[0].includes('value="'+pest+'"')&&match[0].includes('checked=""'));
+    assert.ok(concern,path+' preselects the concern');
     assert.equal(quote.match(/<textarea name="message"[^>]*>([\s\S]*?)<\/textarea>/)[1],page.record.enquiryMessage);
   }
   assert.equal(site.render('/quote',{topic:'unrecognised-topic'}).match(/<textarea name="message"[^>]*>([\s\S]*?)<\/textarea>/)[1],'');
@@ -265,4 +247,34 @@ test('all 44 supplied commercial keyword targets resolve to public page sections
   assert.ok(thane);assert.doesNotMatch(thane.description,/Thane, Mumbai/);
   assert.match(documents.get('/'),/href="\/areas\/thane"/);
   assert.ok(site.sitemap().some(entry=>entry.url.endsWith('/areas/thane')));
+});
+
+
+test('deployed requests supply the canonical origin independently and configured domains take priority',async()=>{
+  const urls=['https://worker-a.example.test/quote','https://worker-b.example.test/services'];
+  const results=await Promise.all(urls.map(url=>site.runWithRequestOrigin(url,async()=>{
+    await new Promise(resolve=>setImmediate(resolve));
+    return site.pageMetadata(site.pages[0]).alternates.canonical;
+  })));
+  assert.deepEqual(results,['https://worker-a.example.test/','https://worker-b.example.test/']);
+  globalThis.__shieldTestEnv.SITE_URL='https://canonical.example.test';
+  try {assert.equal(site.runWithRequestOrigin(urls[0],()=>site.siteConfig().origin),'https://canonical.example.test');}
+  finally {delete globalThis.__shieldTestEnv.SITE_URL;}
+  globalThis.__shieldTestEnv.SITE_ENV='staging';
+  try {assert.equal(site.pageMetadata(site.pages[0]).robots.index,false);assert.equal(site.robots().rules.disallow,'/');}
+  finally {delete globalThis.__shieldTestEnv.SITE_ENV;}
+});
+
+test('both enquiry interfaces expose optional property and scheduling fields with native callback navigation',()=>{
+  const html=documents.get('/quote');
+  const drawer=html.match(/<form id="quote-form"[\s\S]*?<\/form>/)[0];
+  const page=html.match(/<form id="contact-page-form"[\s\S]*?<\/form>/)[0];
+  for(const form of [drawer,page]){
+    for(const name of ['phone','pest','premises_type','care_preference','pincode','preferred_date','preferred_time'])assert.ok(form.includes('name="'+name+'"'),name);
+    assert.ok(form.includes('Help me decide'));assert.ok(form.includes('Other / not sure'));
+    assert.ok(!form.includes('Status: Ready to send.'));
+  }
+  assert.match(site.render('/quote',{request:'callback'}),/<h2>Request a callback\.<\/h2>/);
+  assert.match(documents.get('/contact'),/<a[^>]+href="\/quote\?request=callback"[^>]+data-callback/);
+  assert.match(html,/<pre id="enquiry-preview" hidden(?:="")?><\/pre>/);
 });

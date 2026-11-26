@@ -24,8 +24,6 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
     <link rel="stylesheet" href={assetManifest.css} />
     <meta name="vbk-motion-module" content={assetManifest.motion} />
     {config.gtmId?<meta name="shield-gtm-id" content={config.gtmId} />:config.gaId?<meta name="shield-ga-id" content={config.gaId} />:null}
-    {config.business.email&&<meta name="shield-business-email" content={config.business.email} />}
-    {config.enquiryCc.length>0&&<meta name="shield-enquiry-cc" content={config.enquiryCc.join(',')} />}
   </head><body>
     <div className="layout-fragment" dangerouslySetInnerHTML={{__html:renderTemplate(header,config.business)}} />
     {children}

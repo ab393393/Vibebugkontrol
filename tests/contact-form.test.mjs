@@ -18,9 +18,9 @@ test('contact form stays on-page, blocks duplicate sends, preserves failed detai
   const reference='SS-123456ABCDEF';
   const prepared={success:false,code:'PROVIDER_AJAX',reference,delivery:{url:'https://formsubmit.co/ajax/owner%40example.test',fields:{...values,enquiry_reference:reference}}};
   let fail=true;
-  Object.defineProperty(globalThis,'document',{configurable:true,value:{querySelector:selector=>nodes[selector]||(selector.includes('shield-business-email')?{content:'owner@example.test'}:null)}});
+  Object.defineProperty(globalThis,'document',{configurable:true,value:{querySelector:selector=>nodes[selector]||(selector.includes('mailto:')?{getAttribute:()=>"mailto:owner@example.test"}:null)}});
   Object.defineProperty(globalThis,'window',{configurable:true,value:{shieldTrack:()=>{leads++;}}});
-  Object.defineProperty(globalThis,'FormData',{configurable:true,value:class {constructor(node){this.values=node.values;}[Symbol.iterator](){return Object.entries(this.values)[Symbol.iterator]();}}});
+  Object.defineProperty(globalThis,'FormData',{configurable:true,value:class {constructor(node){this.values=node.values;}get(key){return this.values[key]??null;}getAll(key){const value=this.get(key);return value==null?[]:Array.isArray(value)?value:[value];}[Symbol.iterator](){return Object.entries(this.values)[Symbol.iterator]();}}});
   Object.defineProperty(globalThis,'fetch',{configurable:true,value:async(url,options)=>{
     if(url==='/api/enquiries')return Response.json(prepared,{status:202});
     providerCalls++;assert.equal(options.method,'POST');started();await providerGate;
