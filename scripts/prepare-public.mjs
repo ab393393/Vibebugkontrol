@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { staticSecurityHeaders } from '../lib/security-headers.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const require=createRequire(import.meta.url);const viteRequire=createRequire(require.resolve('vite'));
@@ -18,6 +19,7 @@ function selected(node) {
   return null;
 }
 export async function preparePublic() {
+  await writeFile(path.join(root,'public/_headers'),staticSecurityHeaders());
   const chunks=await Promise.all(styles.map(file=>readFile(path.join(root,'public',file),'utf8')));
   chunks.unshift(await readFile(require.resolve('lenis/dist/lenis.css'),'utf8'));
   const css=chunks.join('\n');const parsed=postcss.parse(css);const critical=postcss.root();
