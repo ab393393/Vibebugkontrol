@@ -35,7 +35,7 @@ jobs:
           REVIEW_BASE: ${{ steps.pages.outputs.base_url }}
         run: |
           .review-venv/bin/python - <<'PY'
-          import concurrent.futures, json, os, re, shutil, subprocess
+          import concurrent.futures, hashlib, json, os, re, shutil, subprocess
           from pathlib import Path
           from urllib.parse import urlsplit, urlunsplit
           from bs4 import BeautifulSoup
@@ -113,7 +113,7 @@ jobs:
                   meta.decompose()
               soup.head.append(soup.new_tag('meta', attrs={'name': 'robots', 'content': 'noindex, follow'}))
               soup.head.append(soup.new_tag('meta', attrs={'name': 'review-source', 'content': live + route}))
-              guard_tag = soup.new_tag('script', src=prefix + '/review-guard.js')
+              guard_tag = soup.new_tag('script', src=prefix + '/review-guard.js?v=' + hashlib.sha256(guard.encode()).hexdigest()[:12])
               soup.head.insert(0, guard_tag)
               notice = soup.new_tag('aside', attrs={'role': 'note', 'style': 'padding:10px 20px;background:#edf3d8;color:#153f31;text-align:center;font:14px/1.5 system-ui'})
               notice.string = 'Read-only website review copy. Page content and original SEO metadata were captured from the live site; noindex applies to this copy. '
