@@ -1,4 +1,6 @@
 import { sendEnquiry, enquiryEmailLink, showEnquiryStatus } from './enquiry-delivery.mjs';
+import { enquiryPayload, enquirySummary } from './enquiry-model.mjs';
+import { indiaDateKey, validPreferredDate } from './site-content.mjs';
 
 export function initContactForm() {
   const form=document.querySelector('#contact-page-form');if(!form) return;
@@ -6,6 +8,16 @@ export function initContactForm() {
   const error=document.querySelector('#contact-error');
   const success=document.querySelector('#contact-success');
   const status=document.querySelector('#contact-status');
+  const date=form.elements.preferred_date;
+  if(date)date.min=indiaDateKey();
+  const syncPremises=()=>{
+    const select=form.elements.premises_type;
+    if(!select)return;
+    for(const option of select.options)if(option.dataset.family)option.disabled=option.dataset.family!==form.elements.property_type.value;
+    if(select.selectedOptions[0]?.disabled)select.value='';
+  };
+  syncPremises();
+  form.elements.property_type?.addEventListener('change',syncPremises);
   let sending=false;
   form.addEventListener('input',event=>{
     event.target.setCustomValidity?.('');
@@ -16,12 +28,14 @@ export function initContactForm() {
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(sending) return;
     error.hidden=true;success.hidden=true;
-    const data=Object.fromEntries(new FormData(form));
+    if(date){date.min=indiaDateKey();if(!validPreferredDate(date.value)){date.setCustomValidity('Choose today or a future date for your requested date.');date.reportValidity();return;}}
+    if(form.reportValidity?.()===false)return;
+    const data=enquiryPayload(new FormData(form));
     if(!String(data.name).trim()) {form.elements.name.setCustomValidity('Please enter your name.');form.elements.name.reportValidity();return;}
     const digits=String(data.phone).replace(/\D/g,'').length;
     if(digits<7 || digits>15 || !/^\+?[\d\s().-]+$/.test(String(data.phone).trim())) {form.elements.phone.setCustomValidity('Enter a valid contact number with 7–15 digits.');form.elements.phone.reportValidity();return;}
-    const payload={...data,request_type:data.request_type||'Quote request',pest_concern:data.pest_concern||'Please see enquiry message',preferred_time:'Any time'};
-    const text=['VBK — ENQUIRY','',`Name: ${data.name}`,`Contact: ${data.phone}`,`Email: ${data.email||'Not provided'}`,`Space: ${data.property_type}`,`Area / city: ${data.area||'To be discussed'}`,`Message: ${data.message||'Please discuss a pest control plan with me.'}`].join('\n');
+    const payload={...data};
+    const text=enquirySummary(payload);
     error.querySelector('[data-enquiry-email]').href=enquiryEmailLink('Pest control enquiry — VBK',text);
     sending=true;form.setAttribute('aria-busy','true');button.disabled=true;button.querySelector('span').textContent='Sending enquiry…';
     try {
@@ -29,6 +43,7 @@ export function initContactForm() {
       showEnquiryStatus(status,'accepted',delivery);success.textContent=delivery.message;
       success.hidden=false;success.focus();window.shieldTrack?.('generate_lead');
     } catch(failure) {
+      error.querySelector('[data-enquiry-email]').href=enquiryEmailLink('Pest control enquiry — VBK',text);
       error.querySelector('p').textContent=failure.message;error.hidden=false;error.focus();button.disabled=false;
       showEnquiryStatus(status,'failed',failure);
     } finally {

@@ -12,6 +12,7 @@ import { proxy } from '../proxy';
 import { NextRequest } from 'next/server';
 import { ResearchReportBody } from '../components/Knowledge';
 export { pages, pageMetadata, siteConfig, robots, sitemap, redirectPath };
+export { runWithRequestOrigin } from '../lib/request-origin.mjs';
 export { POST as submitEnquiry } from '../app/api/enquiries/route';
 export function routeResponse(path:string) {return proxy(new NextRequest('https://shield.test'+path));}
 export function render(path:string,query:any={}) {
