@@ -1,7 +1,8 @@
 import { enquiryPayload, enquirySummary } from './enquiry-model.mjs';
 import { sendEnquiry, enquiryEmailLink, showEnquiryStatus } from './enquiry-delivery.mjs';
 import { openModal, closeModal, motionAllowed } from './dialogs.mjs';
-import { indiaDateKey, validPreferredDate } from './site-content.mjs';
+import { validPreferredDate } from './site-content.mjs';
+import { initDatePicker } from './date-picker.mjs';
 import { initExperience } from './experience.mjs';
 import { initContactForm } from './contact-form.mjs';
 import { initPrivacyControls } from './privacy-controls.mjs';
@@ -19,6 +20,7 @@ function initSite() {
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const dialog = $('#quote-dialog');
   const form = $('#quote-form');
+  initDatePicker(form.elements.preferred_date);
   const stepOne = $('#quote-step-one');
   const stepTwo = $('#quote-step-two');
   const result = $('#quote-result');
@@ -170,7 +172,6 @@ function initSite() {
       if(preferences.care) form.elements.care_preference.value=preferences.care;
       if(preferences.premisesType && [...form.elements.premises_type.options].some(option=>option.value===preferences.premisesType&&!option.disabled)) form.elements.premises_type.value=preferences.premisesType;
       if(preferences.area) form.elements.area.value=preferences.area;
-      $('#preferred-date').min=indiaDateKey();
       setStep(preferences.step===2 ? 2 : 1,false);
     }
     openModal(dialog,trigger);
@@ -198,7 +199,6 @@ function initSite() {
     if (submitting) return;
     if (stepTwo.hidden) { advanceFromSpace(); return; }
     clearFormError();
-    $('#preferred-date').min=indiaDateKey();
     if(!validPreferredDate(form.elements.preferred_date.value)) {
       $('#preferred-date').setCustomValidity('Choose today or a future date for your requested date.');
       $('#preferred-date').reportValidity();

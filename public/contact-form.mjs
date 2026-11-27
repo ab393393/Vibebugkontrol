@@ -1,6 +1,7 @@
 import { sendEnquiry, enquiryEmailLink, showEnquiryStatus } from './enquiry-delivery.mjs';
 import { enquiryPayload, enquirySummary } from './enquiry-model.mjs';
-import { indiaDateKey, validPreferredDate } from './site-content.mjs';
+import { validPreferredDate } from './site-content.mjs';
+import { initDatePicker } from './date-picker.mjs';
 
 export function initContactForm() {
   const form=document.querySelector('#contact-page-form');if(!form) return;
@@ -9,7 +10,7 @@ export function initContactForm() {
   const success=document.querySelector('#contact-success');
   const status=document.querySelector('#contact-status');
   const date=form.elements.preferred_date;
-  if(date)date.min=indiaDateKey();
+  initDatePicker(date);
   const syncPremises=()=>{
     const select=form.elements.premises_type;
     if(!select)return;
@@ -28,7 +29,7 @@ export function initContactForm() {
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(sending) return;
     error.hidden=true;success.hidden=true;
-    if(date){date.min=indiaDateKey();if(!validPreferredDate(date.value)){date.setCustomValidity('Choose today or a future date for your requested date.');date.reportValidity();return;}}
+    if(date&&!validPreferredDate(date.value)){date.setCustomValidity('Choose today or a future date for your requested date.');date.reportValidity();return;}
     if(form.reportValidity?.()===false)return;
     const data=enquiryPayload(new FormData(form));
     if(!String(data.name).trim()) {form.elements.name.setCustomValidity('Please enter your name.');form.elements.name.reportValidity();return;}

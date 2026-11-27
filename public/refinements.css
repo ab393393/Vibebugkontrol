@@ -344,3 +344,70 @@ html[data-input-modality="keyboard"] .button:active{transform:none}
   .home-coverage-links{align-items:flex-start;gap:8px}
   .home-coverage .area-links{justify-content:flex-start}
 }
+
+/* VBK visit calendar: glassy forest panel, with effects tied to the selected holiday. */
+.vbk-date-control{position:relative;width:100%;margin-top:8px}
+.vbk-date-input-row{display:flex;align-items:stretch;gap:0;overflow:hidden;border:1px solid #b9c8b4;border-radius:6px;background:#fffefa;transition:border-color 180ms var(--ease-out),box-shadow 180ms var(--ease-out)}
+.vbk-date-input-row:focus-within{border-color:#789444;box-shadow:0 0 0 3px #d5e8a566}
+.vbk-date-input-row input{display:block;flex:1;min-width:0;width:100%;min-height:48px;margin:0;padding:12px 13px;border:0;border-radius:0;background:transparent;color:var(--ink);font-size:15px;cursor:pointer}
+.vbk-date-input-row input:focus-visible{outline:0}
+.vbk-date-input-row input::placeholder{color:#869080;font-size:13px}
+.vbk-date-trigger{display:grid;place-items:center;width:48px;min-width:48px;min-height:48px;border-left:1px solid var(--line);color:var(--ink);transition:background 180ms var(--ease-out),color 180ms var(--ease-out)}
+.vbk-date-trigger svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.5}
+.vbk-date-clear{padding:0 12px;color:#657068;font-size:12px}
+.vbk-date-clear[hidden]{display:none}
+.vbk-date-calendar{container-type:inline-size;isolation:isolate;position:relative;z-index:5;overflow:hidden;width:min(100%,430px);margin-top:9px;padding:0;border:1px solid #ffffff22;border-radius:22px;background:radial-gradient(ellipse at 68% 0%,#315345 0%,#1b392f 36%,#122a24 82%);box-shadow:0 24px 55px #10251e45,inset 0 1px #ffffff24;color:#f5f3e9;animation:vbk-calendar-in 260ms var(--ease-out) both}
+.vbk-date-calendar[hidden]{display:none}
+.vbk-calendar-scene,.vbk-calendar-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.vbk-calendar-scene{z-index:0;opacity:.94}
+.vbk-calendar-overlay{z-index:2}
+.vbk-calendar-content{position:relative;z-index:1;padding:20px 20px 17px}
+.vbk-calendar-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px;color:#d4dec9}
+.vbk-calendar-brand{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:700;letter-spacing:.14em;white-space:nowrap}
+.vbk-calendar-brand i{width:7px;height:7px;border-radius:50%;background:#c8dd8a;box-shadow:0 0 11px #d5e8a5}
+.vbk-calendar-season{padding:6px 8px;border:1px solid #ffffff20;border-radius:999px;background:#ffffff0a;color:#d3dbd0;font-size:8px;font-weight:600;letter-spacing:.09em}
+.vbk-calendar-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
+.vbk-calendar-heading-copy{min-width:0}
+.vbk-calendar-kicker{margin:0 0 4px;color:#bfcbb8;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.vbk-calendar-heading h3{margin:0;color:#fbfaf4;font-family:var(--font-body);font-size:clamp(18px,5cqi,22px);font-weight:600;line-height:1.15;letter-spacing:-.035em;white-space:nowrap}
+.vbk-calendar-nav{display:flex;align-items:center;gap:5px;flex:none}
+.vbk-month-nav{display:grid;place-items:center;width:36px;height:36px;border:1px solid #ffffff20;border-radius:50%;background:#ffffff0b;color:#eff2e9;font-size:22px;line-height:1;backdrop-filter:blur(10px);transition:background 160ms var(--ease-out),border-color 160ms var(--ease-out)}
+.vbk-month-nav.vbk-today-nav{width:auto;padding-inline:11px;border-radius:999px;font-size:9px;font-weight:700;letter-spacing:.04em}
+.vbk-month-nav:disabled{opacity:.32;cursor:not-allowed}
+.vbk-calendar-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center}
+.vbk-calendar-weekdays{margin-bottom:4px;color:#c4cec0;font-size:10px;font-weight:600;letter-spacing:.04em}
+.vbk-calendar-weekdays span{display:grid;place-items:center;height:30px}
+.vbk-calendar-days{grid-auto-rows:42px}
+.vbk-calendar-day{position:relative;display:grid;place-items:center;align-self:center;justify-self:center;width:min(38px,100%);height:38px;border-radius:50%;color:#f3f2ed;font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;transition:background 140ms var(--ease-out),color 140ms var(--ease-out),transform 140ms var(--ease-out)}
+.vbk-calendar-day.is-outside{color:#a8b0a8;opacity:.52}
+.vbk-calendar-day.is-today:not(.is-selected){box-shadow:0 0 0 1px #c9df8e inset;color:#dff0b4}
+.vbk-calendar-day.is-selected{background:radial-gradient(circle at 34% 25%,#eef5d4,#9ebc69 46%,#587a42);color:#183327;box-shadow:0 0 0 1px #f1f5d8aa inset,0 0 20px #d5e8a56e;font-weight:700;transform:scale(1.06)}
+.vbk-calendar-day:disabled{color:#a2aaa2;opacity:.42;cursor:not-allowed}
+.vbk-calendar-day.has-event:after{position:absolute;bottom:1px;width:4px;height:4px;border-radius:50%;background:#c9df8e;box-shadow:0 0 8px #d5e8a5;content:""}
+.vbk-calendar-day.has-event.is-selected:after{background:#173328;box-shadow:none}
+.vbk-calendar-day.is-fireworks:after{background:#f3c66e;box-shadow:0 0 8px #f3c66e}
+.vbk-calendar-day.is-lanterns:after{background:#ff9e76;box-shadow:0 0 8px #ff9e76}
+.vbk-calendar-note{position:relative;z-index:1;margin:13px 0 0;padding-top:11px;border-top:1px solid #ffffff24;color:#d6ded2;font-size:11px;line-height:1.6}
+.vbk-date-control :is(button,input):focus-visible{outline:2px solid #d5e8a5;outline-offset:2px;z-index:3}
+.vbk-date-calendar.is-winter{background:radial-gradient(ellipse at 68% 0%,#384e68 0%,#1d3542 36%,#122b29 82%)}
+.vbk-date-calendar.is-fireworks{background:radial-gradient(ellipse at 70% 10%,#5a4d2d 0%,#263c31 38%,#122a24 82%)}
+.vbk-date-calendar.is-lanterns{background:radial-gradient(ellipse at 70% 10%,#684431 0%,#3a3a2b 38%,#182e25 82%)}
+.vbk-date-calendar.is-fireworks:before,.vbk-date-calendar.is-lanterns:before{position:absolute;z-index:0;pointer-events:none;content:"";inset:8% 6% auto auto;width:42%;height:35%;opacity:.52}
+.vbk-date-calendar.is-fireworks:before{background:radial-gradient(circle at 24% 46%,#f1d78d 0 1px,transparent 2px),radial-gradient(circle at 24% 46%,#e0b65b33 0 13px,transparent 28px),radial-gradient(circle at 72% 23%,#d5e8a5 0 1px,transparent 2px),radial-gradient(circle at 72% 23%,#d5e8a533 0 10px,transparent 24px);animation:vbk-firework-glow 2.6s ease-in-out infinite alternate}
+.vbk-date-calendar.is-lanterns:before{content:"✦　　✧　　✦";color:#f2c58a;font-size:14px;letter-spacing:18px;text-shadow:0 0 12px #efa95a;animation:vbk-lantern-rise 5s ease-in-out infinite}
+@media(max-width:760px){
+  .quote-dialog .visit-preferences .form-row{grid-template-columns:minmax(0,1fr);gap:0}
+  .quote-dialog .visit-preferences .form-row>.field-label{min-width:0;width:100%}
+  .vbk-date-input-row input{font-size:16px}
+  .vbk-date-calendar{width:100%;max-width:430px;border-radius:19px}
+  .vbk-calendar-content{padding:18px 16px 15px}
+  .vbk-calendar-days{grid-auto-rows:44px}
+  .vbk-calendar-day{width:40px;height:40px}
+  .vbk-month-nav{width:36px;height:36px}
+}
+@container(max-width:360px){.vbk-calendar-season,.vbk-today-nav{display:none}.vbk-calendar-heading h3{font-size:18px}.vbk-calendar-brand{font-size:8px}.vbk-calendar-content{padding-inline:13px}.vbk-calendar-days{grid-auto-rows:40px}.vbk-calendar-day{width:36px;height:36px}}
+@media(hover:hover) and (pointer:fine){.vbk-date-trigger:hover{background:#eff3e8;color:#294238}.vbk-month-nav:not(:disabled):hover{background:#ffffff1e;border-color:#ffffff48;color:#fff}.vbk-calendar-day:not(:disabled):not(.is-selected):hover{background:#ffffff18;transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.vbk-date-calendar,.vbk-date-calendar.is-fireworks:before,.vbk-date-calendar.is-lanterns:before{animation:none}.vbk-date-input-row,.vbk-date-trigger,.vbk-month-nav,.vbk-calendar-day{transition:none}.vbk-calendar-day.is-selected{transform:none}}
+@keyframes vbk-calendar-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes vbk-firework-glow{from{opacity:.25;transform:scale(.92)}to{opacity:.8;transform:scale(1.05)}}
+@keyframes vbk-lantern-rise{from{opacity:.15;transform:translateY(9px)}to{opacity:.8;transform:translateY(-8px)}}
