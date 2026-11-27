@@ -356,7 +356,9 @@ html[data-input-modality="keyboard"] .button:active{transform:none}
 .vbk-date-trigger svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.5}
 .vbk-date-clear{padding:0 12px;color:#657068;font-size:12px}
 .vbk-date-clear[hidden]{display:none}
-.vbk-date-calendar{container-type:inline-size;isolation:isolate;position:relative;z-index:5;overflow:hidden;width:min(100%,430px);margin-top:9px;padding:0;border:1px solid #ffffff22;border-radius:22px;background:radial-gradient(ellipse at 68% 0%,#315345 0%,#1b392f 36%,#122a24 82%);box-shadow:0 24px 55px #10251e45,inset 0 1px #ffffff24;color:#f5f3e9;animation:vbk-calendar-in 260ms var(--ease-out) both}
+.contact-page-form .form-row:has(.vbk-date-calendar:not([hidden])),.quote-dialog .visit-preferences .form-row:has(.vbk-date-calendar:not([hidden])){grid-template-columns:minmax(0,1fr);gap:0}
+.contact-page-form .form-row:has(.vbk-date-calendar:not([hidden]))>.field-label,.quote-dialog .visit-preferences .form-row:has(.vbk-date-calendar:not([hidden]))>.field-label{min-width:0;width:100%}
+.vbk-date-calendar{container-type:inline-size;isolation:isolate;position:relative;z-index:5;overflow:hidden;width:min(100%,560px);margin-top:9px;padding:0;border:1px solid #ffffff22;border-radius:22px;background:radial-gradient(ellipse at 68% 0%,#315345 0%,#1b392f 36%,#122a24 82%);box-shadow:0 24px 55px #10251e45,inset 0 1px #ffffff24;color:#f5f3e9;animation:vbk-calendar-in 260ms var(--ease-out) both}
 .vbk-date-calendar[hidden]{display:none}
 .vbk-calendar-scene,.vbk-calendar-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .vbk-calendar-scene{z-index:0;opacity:.94}
@@ -399,7 +401,7 @@ html[data-input-modality="keyboard"] .button:active{transform:none}
   .quote-dialog .visit-preferences .form-row{grid-template-columns:minmax(0,1fr);gap:0}
   .quote-dialog .visit-preferences .form-row>.field-label{min-width:0;width:100%}
   .vbk-date-input-row input{font-size:16px}
-  .vbk-date-calendar{width:100%;max-width:430px;border-radius:19px}
+  .vbk-date-calendar{width:100%;max-width:560px;border-radius:19px}
   .vbk-calendar-content{padding:18px 16px 15px}
   .vbk-calendar-days{grid-auto-rows:44px}
   .vbk-calendar-day{width:40px;height:40px}
